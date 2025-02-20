@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LeapEdu.Controls.Entries.Code.CodeEntryItem"
+             xmlns:entries="clr-namespace:LeapEdu.Controls.Entries"
+             x:Name="Root">
+    <VerticalStackLayout>
+        <Border
+            x:Name="EntryBorder"
+            Stroke="{StaticResource BackgroundEntryColor}"
+            Background="{StaticResource BackgroundEntryColor}">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="{Binding CornerRadius, Source={x:Reference Root}}" />
+            </Border.StrokeShape>
+
+            <entries:BackspaceEntry 
+                x:Name="CodeEntry"
+                Keyboard="Numeric"
+                MaxLength="1"
+                WidthRequest="44" 
+                HeightRequest="54"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                FontFamily="MontserratSemiBold"
+                FontSize="17"
+                BackspacePressedOnEmpty="CodeEntryItem_BackspacePressedOnEmpty"
+                Focused="CodeEntryItem_Focused"
+                Unfocused="CodeEntryItem_Unfocused"
+                TextChanged="CodeEntryItem_TextChanged"/>
+        </Border>
+    </VerticalStackLayout>
+</ContentView>

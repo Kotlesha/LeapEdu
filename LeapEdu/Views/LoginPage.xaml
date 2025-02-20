@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:buttons="clr-namespace:LeapEdu.Controls.Buttons"
+             xmlns:entries="clr-namespace:LeapEdu.Controls.Entries"
+             xmlns:labels="clr-namespace:LeapEdu.Controls.Labels"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             x:Class="LeapEdu.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             x:Name="Root">
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="{StaticResource BackgroundColor}" StatusBarStyle="DarkContent" />
+    </Page.Behaviors>
+
+    <ScrollView>
+        <StackLayout>
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="RemoveFocus" />
+            </StackLayout.GestureRecognizers>
+
+            <Image 
+                Source="frog_background_image.png" 
+                MaximumHeightRequest="220" 
+                Aspect="AspectFill"/>
+
+            <StackLayout Padding="24" VerticalOptions="Center">
+                <Label
+                    Text="Вход в аккаунт"
+                    FontFamily="MontserratBold"
+                    FontSize="28"
+                    Padding="13,0,0,12"/>
+
+                <Grid ColumnSpacing="19" Padding="0,0,0,21" ColumnDefinitions="*,*,*">
+                    <buttons:AnimatedAuthImageButton 
+                         Source="google_icon.png"
+                         Style="{StaticResource AuthImageButtonStyle}"
+                         Grid.Column="0">
+                    </buttons:AnimatedAuthImageButton>
+
+                    <buttons:AnimatedAuthImageButton 
+                         Source="microsoft_icon.png"
+                         Style="{StaticResource AuthImageButtonStyle}"
+                         Grid.Column="1">
+                    </buttons:AnimatedAuthImageButton>
+
+                    <buttons:AnimatedAuthImageButton 
+                         Source="telegram_icon.png"
+                         Style="{StaticResource AuthImageButtonStyle}"
+                         Grid.Column="2">
+                    </buttons:AnimatedAuthImageButton>
+                </Grid>
+
+                <Grid ColumnSpacing="10" Padding="0,0,0,21" ColumnDefinitions="*,Auto,*">
+                    <BoxView 
+                        HeightRequest="1" 
+                        Color="Black"
+                        Grid.Column="0" />
+
+                    <Label
+                        Text="или"
+                        FontFamily="MontserratSemiBold"
+                        FontSize="10"
+                        Grid.Column="1"/>
+
+                    <BoxView 
+                        HeightRequest="1" 
+                        Color="Black"
+                        Grid.Column="2"/>
+                </Grid>
+
+                <VerticalStackLayout Spacing="15">
+                    <VerticalStackLayout>
+                        <Label 
+                            Text="Электронная почта"
+                            Style="{StaticResource LabelStyleForEntry}" />
+
+                        <entries:RoundedEntry 
+                            x:Name="EmailEntry"
+                            Value="{Binding Email.Value}"
+                            PlaceholderText="Andrey@example.com" 
+                            KeyboardType="Email"
+                            IsValid="{Binding Email.IsValid}"
+                            ErrorMessage="{Binding Email.FirstError}"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label 
+                            Text="Пароль"
+                            Style="{StaticResource LabelStyleForEntry}" />
+
+                        <entries:RoundedEntry
+                            x:Name="PasswordEntry"
+                            Value="{Binding Password.Value}"
+                            PlaceholderText="Ваш пароль"
+                            IsPasswordEntry="True"
+                            IsValid="{Binding Password.IsValid}"
+                            ErrorMessage="{Binding Password.FirstError}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <labels:AnimatedLabel 
+                    Text="Забыли пароль?"
+                    FontFamily="MontserratMedium"
+                    FontSize="14"
+                    Padding="13,10,0,24"
+                    TextDecorations="Underline"
+                    HorizontalOptions="Start"
+                    TextColor="Black">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="RepairPassword_Tapped" />
+                    </Label.GestureRecognizers>
+                </labels:AnimatedLabel>
+
+                <Button
+                    Text="Войти"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    Margin="0,0,0,9"
+                    Pressed="SignIn_Button_Pressed"/>
+
+                <labels:AnimatedLabel HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Нет аккаунта?" FontFamily="MontserratRegular" FontSize="14" />
+                            <Span Text=" " />
+                            <Span Text="Зарегистрируйтесь" FontFamily="MontserratSemiBold" FontSize="14">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="RegisterLabel_Tapped"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </labels:AnimatedLabel>
+
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

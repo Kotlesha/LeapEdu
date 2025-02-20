@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:entries="clr-namespace:LeapEdu.Controls.Entries"
+             x:Class="LeapEdu.Views.RegisterPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource BackgroundColor}">
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="{StaticResource BackgroundColor}" StatusBarStyle="DarkContent" />
+    </Page.Behaviors>
+
+    <ScrollView>
+        <StackLayout>
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="RemoveFocus" />
+            </StackLayout.GestureRecognizers>
+            
+            <Image 
+                Source="frog_background_image.png" 
+                MaximumHeightRequest="220" 
+                Aspect="AspectFill"/>
+
+            <StackLayout Padding="24" Spacing="15" VerticalOptions="Center">
+                <Label
+                    Text="Регистрация"
+                    FontFamily="MontserratBold"
+                    FontSize="28"
+                    Padding="13,0,0,0"/>
+                
+                <VerticalStackLayout>
+                    <Label 
+                        Text="Фамилия"
+                        Style="{StaticResource LabelStyleForEntry}" />
+                    
+                    <entries:RoundedEntry 
+                        x:Name="NameRoundedEntry"
+                        PlaceholderText="Иванов"
+                        Value="{Binding Surname.Value}"
+                        IsValid="{Binding Surname.IsValid}"
+                        ErrorMessage="{Binding Surname.FirstError}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label 
+                        Text="Имя"
+                        Style="{StaticResource LabelStyleForEntry}" />
+                    
+                    <entries:RoundedEntry 
+                        PlaceholderText="Иван"
+                        Value="{Binding Name.Value}"
+                        IsValid="{Binding Name.IsValid}"
+                        ErrorMessage="{Binding Name.FirstError}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label 
+                        Text="Электронная почта"
+                        Style="{StaticResource LabelStyleForEntry}" />
+
+                    <entries:RoundedEntry 
+                        PlaceholderText="Andrey@example.com" 
+                        KeyboardType="Email"
+                        Value="{Binding Email.Value}"
+                        IsValid="{Binding Email.IsValid}"
+                        ErrorMessage="{Binding Email.FirstError}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label 
+                        Text="Пароль"
+                        Style="{StaticResource LabelStyleForEntry}" />
+                    
+                    <entries:RoundedEntry
+                        PlaceholderText="Ваш пароль"
+                        IsPasswordEntry="True"
+                        Value="{Binding Password.Value}"
+                        IsValid="{Binding Password.IsValid}"
+                        ErrorMessage="{Binding Password.FirstError}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label
+                        Text="Повторите пароль"
+                        Style="{StaticResource LabelStyleForEntry}" />
+                    
+                    <entries:RoundedEntry
+                        PlaceholderText="Повторите пароль"
+                        IsPasswordEntry="True"
+                        Value="{Binding PasswordConfirmation.Value}"
+                        IsValid="{Binding PasswordConfirmation.IsValid}"
+                        ErrorMessage="{Binding PasswordConfirmation.FirstError}" />
+                </VerticalStackLayout>
+
+                <Grid ColumnDefinitions="Auto,*" HorizontalOptions="Center">
+                    <CheckBox 
+                        Color="{StaticResource BackgroundButtonColor}"
+                        Grid.Column="0"
+                        VerticalOptions="Center"/>
+                    
+                    <Label Grid.Column="1" HorizontalTextAlignment="Center" HorizontalOptions="Start">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Вы согласны с нашей " FontFamily="MontserratRegular" FontSize="15" />
+                                <Span Text="Политикой конфиденциальности" FontFamily="MontserratSemiBold" FontSize="15" />
+                                <Span Text=" и " FontFamily="MontserratRegular" FontSize="15" />
+                                <Span Text="Условиями использования" FontFamily="MontserratSemiBold" FontSize="15" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+                
+                <Button 
+                    Text="Зарегистрироваться"
+                    Pressed="RegisterButton_Pressed"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    Padding="9,13,9,13"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

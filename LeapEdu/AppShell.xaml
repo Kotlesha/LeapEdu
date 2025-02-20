@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="LeapEdu.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LeapEdu.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="{StaticResource BackgroundColor}"
+    Title="LeapEdu">
+
+    <ShellContent
+        Title="Вход в аккаунт"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="login" />
+
+    <ShellContent
+        Title="Регистрация"
+        ContentTemplate="{DataTemplate local:RegisterPage}"
+        Route="register" />
+
+    <ShellContent
+        Title="Восстановление пароля"
+        ContentTemplate="{DataTemplate local:RepairPasswordPage}"
+        Route="repairPassword" />
+
+    <ShellContent
+        Title="Подтверждение входа"
+        ContentTemplate="{DataTemplate local:LoginVerificationPage}"
+        Route="loginVerification" />
+</Shell>

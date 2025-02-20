@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LeapEdu.Controls.Entries.RoundedEntry"
+             x:Name="Root">
+    <StackLayout>
+        <VerticalStackLayout>
+            <Border 
+                x:Name="EntryBorder"
+                Padding="15,0,10,0"
+                Stroke="{StaticResource BackgroundEntryColor}"
+                Background="{StaticResource BackgroundEntryColor}">
+                
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="{Binding CornerRadius, Source={x:Reference Root}}" />
+                </Border.StrokeShape>
+
+                <Grid Padding="15,0,15,0" HeightRequest="54" ColumnDefinitions="*,Auto">
+                    <Entry
+                        x:Name="EntryField"
+                        Text="{Binding Value, Source={x:Reference Root}}"
+                        Placeholder="{Binding PlaceholderText, Source={x:Reference Root}}"
+                        PlaceholderColor="{StaticResource PlaceholderColor}"
+                        FontFamily="MontserratSemiBold"
+                        IsPassword="{Binding ShowPassword, Source={x:Reference Root}}"
+                        FontSize="17"
+                        TextChanged="EntryField_TextChanged"
+                        Focused="EntryField_Focused"
+                        Unfocused="EntryField_Unfocused"
+                        VerticalOptions="Center"
+                        Grid.Column="0"/>
+                    <ImageButton
+                        Source="{Binding ShowPassword, Source={x:Reference Root}, Converter={StaticResource PasswordVisibilityIconConverter}}"
+                        Clicked="ChangePasswordVisibility"
+                        IsVisible="{Binding IsPasswordEntry, Source={x:Reference Root}}"
+                        BackgroundColor="Transparent"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="End"
+                        WidthRequest="30"
+                        HeightRequest="50"
+                        Grid.Column="1"/>
+                </Grid>
+            </Border>
+
+            <Grid ColumnDefinitions="Auto, *"
+                IsVisible="{Binding IsValid, Source={x:Reference Root}, Converter={StaticResource BoolToVisibilityConverter}}" 
+                VerticalOptions="Center"
+                ColumnSpacing="5"
+                Padding="13,0,0,0">
+                
+                <Image 
+                    Source="error_icon.svg" 
+                    WidthRequest="15" 
+                    HeightRequest="15"
+                    Grid.Column="0"/>
+                <Label 
+                    Text="{Binding ErrorMessage, Source={x:Reference Root}}"
+                    TextColor="Red"
+                    FontFamily="MontserratSemiBold"
+                    FontSize="14"
+                    VerticalOptions="Center"
+                    HorizontalOptions="FillAndExpand"
+                    LineBreakMode="WordWrap"
+                    Grid.Column="1"/>
+            </Grid>
+        </VerticalStackLayout>
+    </StackLayout>
+</ContentView>

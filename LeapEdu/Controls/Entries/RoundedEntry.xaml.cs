@@ -51,7 +51,8 @@ public partial class RoundedEntry : ContentView
             typeof(bool), 
             typeof(RoundedEntry), 
             true,
-            BindingMode.TwoWay);
+            BindingMode.TwoWay,
+            propertyChanged: OnIsValidPropertyChanged);
 
     public static readonly BindableProperty IsPasswordEntryProperty =
         BindableProperty.Create(
@@ -140,16 +141,17 @@ public partial class RoundedEntry : ContentView
     private void EntryField_Focused(object sender, FocusEventArgs e)
     {
         var border = this.FindByName<Border>("EntryBorder");
-        border.Stroke = Colors.Black;
+        border.Stroke = Application.Current!.Resources["BorderColorFocused"] as Color;
     }
 
-    private void EntryField_Unfocused(object sender, FocusEventArgs e)
-    {
-        var border = this.FindByName<Border>("EntryBorder");
-        border.Stroke = Application.Current!.Resources["BackgroundEntryColor"] as Color;
-    }
+    private void EntryField_Unfocused(object sender, FocusEventArgs e) => UpdateBorderColor();
 
     private void ChangePasswordVisibility(object sender, EventArgs e) => ShowPassword = !ShowPassword;
+
+    private static void OnIsValidPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is RoundedEntry entry) entry.UpdateBorderColor();
+    }
 
     private static void OnIsPasswordEntryChanged(BindableObject bindable, object oldValue, object newValue)
     {
@@ -159,6 +161,26 @@ public partial class RoundedEntry : ContentView
 
     private void EntryField_TextChanged(object sender, TextChangedEventArgs e)
     {
-       if (!IsValid) IsValid = true;
+        if (!IsValid) IsValid = true;
+    }
+
+    private void UpdateBorderColor()
+    {
+        var border = this.FindByName<Border>("EntryBorder");
+        var entry = this.FindByName<Entry>("EntryField");
+
+        var resources = Application.Current!.Resources;
+
+        var validColor = (Color)resources["BackgroundEntryColor"];
+        var focusedColor = (Color)resources["BorderColorFocused"];
+        var invalidColor = (Color)resources["InvalidDataColor"];
+
+        if (entry.IsFocused)
+        {
+            border.Stroke = focusedColor;
+            return;
+        }
+
+        border.Stroke = IsValid ? validColor : invalidColor;
     }
 }

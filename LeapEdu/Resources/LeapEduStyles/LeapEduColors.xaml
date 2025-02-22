@@ -7,4 +7,6 @@
     <Color x:Key="NavigationBarColor">#9FE2BF</Color>
     <Color x:Key="BackgroundEntryColor">#FFFCFC</Color>
     <Color x:Key="PlaceholderColor">#878787</Color>
+    <Color x:Key="BorderColorFocused">Black</Color>
+    <Color x:Key="InvalidDataColor">Red</Color>
 </ResourceDictionary>

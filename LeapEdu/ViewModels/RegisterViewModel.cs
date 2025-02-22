@@ -55,24 +55,22 @@ public class RegisterViewModel : ObservableObject
 
     public bool Validate()
     {
-        Surname.ClearState();
-        Name.ClearState();
-        Email.ClearState();
-        Password.ClearState();
-        PasswordConfirmation.ClearState();
+        bool isValid = true;
 
-        var isValidSurname = Surname.Validate();
-        var isValidName = Name.Validate();
-        var isValidEmail = Email.Validate();
-        var isValidPassword = Password.Validate();
-        var isValidPasswordConfirmation = PasswordConfirmation.Validate();
+        var fields = new[]
+        {
+            Surname,
+            Name,
+            Email,
+            Password,
+            PasswordConfirmation
+        };
 
-        var result = isValidSurname 
-            && isValidName 
-            && isValidEmail 
-            && isValidPassword 
-            && isValidPasswordConfirmation;
+        foreach (var field in fields) field.ClearState();
 
-        return result;
+        foreach (var field in fields)
+            if (!field.Validate()) isValid = false;
+
+        return isValid;
     }
 }

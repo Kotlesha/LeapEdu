@@ -81,10 +81,7 @@ public partial class CodeEntryItem : ContentView
             return;
         }
 
-        if (e.NewTextValue?.Length == 1)
-        {
-            NextFocusCommand.ExecuteIfCan(this);
-        }
+        if (e.NewTextValue?.Length == 1) NextFocusCommand.ExecuteIfCan(this);
     }
 
     private void CodeEntryItem_BackspacePressedOnEmpty(object? sender, EventArgs e)

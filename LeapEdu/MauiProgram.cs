@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using LeapEdu.Controls.Labels;
 using LeapEdu.Controls.Entries;
 
 namespace LeapEdu;
@@ -24,6 +25,7 @@ public static class MauiProgram
 #if ANDROID
                 handlers.AddHandler(typeof(Entry), typeof(Platforms.Android.Handlers.CustomEntryHandler));
                 handlers.AddHandler(typeof(BackspaceEntry), typeof(Platforms.Android.Handlers.BackspaceEntryHandler));
+                handlers.AddHandler(typeof(JustifyLabel), typeof(Platforms.Android.Handlers.JustifyLabelHandler));
 #endif
             });
 

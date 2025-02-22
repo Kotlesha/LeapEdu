@@ -6,7 +6,7 @@ public class MatchFieldRule<T>(ValidatableObject<T> otherField) : IValidationRul
 {
     private readonly ValidatableObject<T> _otherField = otherField;
 
-    public string ValidationMessage { get; set; } = "Пароли не совпадают.";
+    public string ValidationMessage { get; set; } = "Пароли не совпадают!";
 
     public bool Check(T value)
     {

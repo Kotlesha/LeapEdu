@@ -5,8 +5,8 @@ namespace LeapEdu.Validation.Implementations.Rules;
 public class PasswordLowercaseLetterRule<T> : IValidationRule<T>
 {
     public string ValidationMessage { get; set; } =
-        "Пароль должен содержать хотя бы одну строчную букву!";
+        "Пароль должен содержать хотя бы одну строчную латинскую букву!";
 
     public bool Check(T value) =>
-        value is string str && str.Any(char.IsLower);
+        value is string str && ValidationConstants.LowercaseLetterRegex.IsMatch(str);
 }

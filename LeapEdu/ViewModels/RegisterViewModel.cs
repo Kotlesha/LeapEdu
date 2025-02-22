@@ -46,9 +46,11 @@ public class RegisterViewModel : ObservableObject
         };
 
         Password.Validations.AddRange(passwordRules);
-        PasswordConfirmation.Validations.AddRange(passwordRules);
 
-        PasswordConfirmation.Validations.Add(new MatchFieldRule<string>(Password));
+        PasswordConfirmation.Validations.AddRange([
+            new IsNotNullOrEmptyRule<string>(),
+            new MatchFieldRule<string>(Password)
+        ]);
     }
 
     public bool Validate()

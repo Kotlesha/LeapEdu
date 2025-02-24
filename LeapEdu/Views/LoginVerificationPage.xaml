@@ -3,87 +3,78 @@
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:entries="clr-namespace:LeapEdu.Controls.Entries.Code"
              x:Class="LeapEdu.Views.LoginVerificationPage"
-             Shell.NavBarIsVisible="False"
+             xmlns:viewmodels="clr-namespace:LeapEdu.ViewModels"
+             x:DataType="viewmodels:LoginVerificationViewModel"
+             Shell.BackgroundColor="{StaticResource BackgroundColor}"
              BackgroundColor="{StaticResource BackgroundColor}">
-
     <Page.Behaviors>
         <mct:StatusBarBehavior StatusBarColor="{StaticResource BackgroundColor}" StatusBarStyle="DarkContent" />
     </Page.Behaviors>
 
-    <AbsoluteLayout>
-        <StackLayout Spacing="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-            <StackLayout.GestureRecognizers>
-                <TapGestureRecognizer Tapped="RemoveFocus" />
-            </StackLayout.GestureRecognizers>
+    <StackLayout Spacing="20">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="RemoveFocus" />
+        </StackLayout.GestureRecognizers>
 
-            <Image 
-                Source="frog_background_image.png" 
-                MaximumHeightRequest="220" 
-                Aspect="AspectFill"/>
+        <Image 
+            Source="frog_background_image.png" 
+            MaximumHeightRequest="180" 
+            Aspect="Center"/>
 
-            <StackLayout Padding="24" Spacing="20">
-                <VerticalStackLayout>
+        <StackLayout Padding="24,12,24,0" Spacing="15">
+            <Label
+                Text="Верификация"
+                FontFamily="MontserratBold"
+                FontSize="28"/>
+            
+            <VerticalStackLayout>
+                <Label
+                    Text="Код подтверждения отправлен на email"
+                    FontFamily="MontserratMedium"
+                    FontSize="16" />
+
+                <Label
+                    Text="{Binding Email}"
+                    FontFamily="MontserratSemiBold"
+                    FontSize="16" />
+            </VerticalStackLayout>
+
+            <entries:CodeEntry x:Name="CodeEntryPanel" Code="{Binding Code, Mode=TwoWay}" />
+
+            <Grid
+                ColumnDefinitions="Auto,*"
+                ColumnSpacing="10">
+
+                <ImageButton
+                    BackgroundColor="{StaticResource BackgroundButtonColor}"
+                    Source="retry_icon.svg"
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    IsEnabled="{Binding IsRetryButtonEnabled}"
+                    Pressed="RetryButton_Pressed"
+                    Padding="7"
+                    CornerRadius="9"/>
+
+                <VerticalStackLayout Grid.Column="1">
                     <Label
-                        Text="Код подтверждения отправлен на email"
+                        Text="Повторный код можно запросить через"
                         FontFamily="MontserratMedium"
                         HorizontalTextAlignment="Center"
-                        FontSize="16" />
+                        FontSize="14"/>
 
                     <Label
-                        Text="Andrey@example.com"
+                        Text="{Binding RemainingSeconds, Converter={StaticResource TimeRemainingToStringConverter}}"
                         FontFamily="MontserratSemiBold"
                         HorizontalTextAlignment="Center"
-                        FontSize="16" />
+                        FontSize="14" />
                 </VerticalStackLayout>
+            </Grid>
 
-                <entries:CodeEntry x:Name="CodeEntryPanel"/>
-
-                <Grid
-                    ColumnDefinitions="Auto,*"
-                    ColumnSpacing="10">
-
-                    <ImageButton
-                        BackgroundColor="{StaticResource BackgroundButtonColor}"
-                        Source="retry_icon.svg"
-                        HeightRequest="35"
-                        WidthRequest="35"
-                        Padding="7"
-                        CornerRadius="9"/>
-
-                    <VerticalStackLayout Grid.Column="1">
-                        <Label
-                            Text="Повторный код можно запросить через"
-                            FontFamily="MontserratMedium"
-                            HorizontalTextAlignment="Center"
-                            FontSize="14"/>
-
-                        <Label
-                            Text="00:49"
-                            FontFamily="MontserratSemiBold"
-                            HorizontalTextAlignment="Center"
-                            FontSize="14" />
-                    </VerticalStackLayout>
-                </Grid>
-
-                <Button 
-                    Text="Подтвердить"
-                    Style="{StaticResource DefaultButtonStyle}"
-                    Padding="9,13,9,13"/>
-            </StackLayout>
+            <Button 
+                Text="Подтвердить"
+                IsEnabled="{Binding IsCodeComplete}"
+                Style="{StaticResource DefaultButtonStyle}"
+                Padding="9,13,9,13"/>
         </StackLayout>
-
-        <Button 
-            Text="Назад"
-            BackgroundColor="{StaticResource BackgroundButtonColor}"
-            TextColor="White"
-            FontSize="14"
-            CornerRadius="30"
-            HeightRequest="50"
-            AbsoluteLayout.LayoutBounds="0.05, 0.02, 0, 50"
-            AbsoluteLayout.LayoutFlags="PositionProportional"
-            HorizontalOptions="StartAndExpand"
-            />
-
-    </AbsoluteLayout>
-
+    </StackLayout>
 </ContentPage>

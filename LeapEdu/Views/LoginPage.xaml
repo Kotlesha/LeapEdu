@@ -7,6 +7,8 @@
              xmlns:entries="clr-namespace:LeapEdu.Controls.Entries"
              xmlns:labels="clr-namespace:LeapEdu.Controls.Labels"
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:viewmodels="clr-namespace:LeapEdu.ViewModels"
+             x:DataType="viewmodels:LoginViewModel"
              x:Class="LeapEdu.Views.LoginPage"
              Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource BackgroundColor}"
@@ -23,8 +25,8 @@
 
             <Image 
                 Source="frog_background_image.png" 
-                MaximumHeightRequest="220" 
-                Aspect="AspectFill"/>
+                MaximumHeightRequest="200" 
+                Aspect="Center"/>
 
             <StackLayout Padding="24" VerticalOptions="Center">
                 <Label

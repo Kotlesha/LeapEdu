@@ -2,13 +2,16 @@
 
 namespace LeapEdu.Converters;
 
-public class PasswordVisibilityIconConverter : IValueConverter
+public class BoolToColorAgreementLabelConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is bool isPasswordVisible)
+        if (value is bool IsValid)
         {
-            return isPasswordVisible ? "open_eye_icon.svg" : "close_eye_icon.svg";
+            var invalidColor = (Color)App.Current!.Resources["InvalidDataColor"];
+            var normalColor = (Color)App.Current!.Resources["DefaultLabelTextColor"];
+
+            return IsValid ? normalColor : invalidColor;
         }
 
         return null;

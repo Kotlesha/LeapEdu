@@ -4,13 +4,15 @@
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:entries="clr-namespace:LeapEdu.Controls.Entries"
              x:Class="LeapEdu.Views.RegisterPage"
-             Shell.NavBarIsVisible="False"
+             xmlns:viewmodels="clr-namespace:LeapEdu.ViewModels"
+             x:DataType="viewmodels:RegisterViewModel"
+             Shell.BackgroundColor="{StaticResource BackgroundColor}"
              BackgroundColor="{StaticResource BackgroundColor}">
     <Page.Behaviors>
         <mct:StatusBarBehavior StatusBarColor="{StaticResource BackgroundColor}" StatusBarStyle="DarkContent" />
     </Page.Behaviors>
 
-    <ScrollView>
+    <ScrollView VerticalScrollBarVisibility="Never">
         <StackLayout>
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Tapped="RemoveFocus" />
@@ -18,10 +20,10 @@
             
             <Image 
                 Source="frog_background_image.png" 
-                MaximumHeightRequest="220" 
-                Aspect="AspectFill"/>
+                MaximumHeightRequest="180" 
+                Aspect="Center"/>
 
-            <StackLayout Padding="24" Spacing="15" VerticalOptions="Center">
+            <StackLayout Padding="27" Spacing="15" VerticalOptions="Center">
                 <Label
                     Text="Регистрация"
                     FontFamily="MontserratBold"
@@ -94,17 +96,53 @@
 
                 <Grid ColumnDefinitions="Auto,*" HorizontalOptions="Center">
                     <CheckBox 
-                        Color="{StaticResource BackgroundButtonColor}"
+                        Color="{Binding TermsAccepted.IsValid, Converter={StaticResource BoolToColorCheckBoxConverter}}"
                         Grid.Column="0"
+                        IsChecked="{Binding TermsAccepted.Value}"
                         VerticalOptions="Center"/>
                     
-                    <Label Grid.Column="1" HorizontalTextAlignment="Center" HorizontalOptions="Start">
+                    <Label
+                        x:Name="AgreementLabel"
+                        Grid.Column="1" 
+                        HorizontalTextAlignment="Center" 
+                        HorizontalOptions="Start"
+                        TextColor="{Binding TermsAccepted.IsValid, Converter={StaticResource BoolToColorAgreementLabelConverter}}">
+                        
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="Вы согласны с нашей " FontFamily="MontserratRegular" FontSize="15" />
-                                <Span Text="Политикой конфиденциальности" FontFamily="MontserratSemiBold" FontSize="15" />
-                                <Span Text=" и " FontFamily="MontserratRegular" FontSize="15" />
-                                <Span Text="Условиями использования" FontFamily="MontserratSemiBold" FontSize="15" />
+                                <Span 
+                                    Text="Вы согласны с нашей " 
+                                    FontFamily="MontserratRegular" 
+                                    FontSize="15"
+                                    TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}"/>
+                                
+                                <Span 
+                                    Text="Политикой конфиденциальности" 
+                                    FontFamily="MontserratSemiBold" 
+                                    FontSize="15"
+                                    TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}">
+                                    
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="PrivacyPolicy_Tapped" />
+                                    </Span.GestureRecognizers>
+                                </Span>
+                                
+                                <Span 
+                                    Text=" и " 
+                                    FontFamily="MontserratRegular" 
+                                    FontSize="15"
+                                    TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}"/>
+
+                                <Span 
+                                    Text="Условиями использования" 
+                                    FontFamily="MontserratSemiBold" 
+                                    FontSize="15"
+                                    TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}">
+                                    
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TermsOfUse_Tapped" />
+                                    </Span.GestureRecognizers>
+                                </Span>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

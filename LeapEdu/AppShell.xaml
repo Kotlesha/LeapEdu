@@ -12,19 +12,4 @@
         Title="Вход в аккаунт"
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="login" />
-
-    <ShellContent
-        Title="Регистрация"
-        ContentTemplate="{DataTemplate local:RegisterPage}"
-        Route="register" />
-
-    <ShellContent
-        Title="Восстановление пароля"
-        ContentTemplate="{DataTemplate local:RepairPasswordPage}"
-        Route="repairPassword" />
-
-    <ShellContent
-        Title="Подтверждение входа"
-        ContentTemplate="{DataTemplate local:LoginVerificationPage}"
-        Route="loginVerification" />
 </Shell>

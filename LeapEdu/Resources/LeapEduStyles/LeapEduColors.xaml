@@ -2,11 +2,19 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Color x:Key="BackgroundColor">#9FE2BF</Color>
+    
     <Color x:Key="BackgroundButtonColor">#FFBA00</Color>
     <Color x:Key="BackgroundImageButtonColor">#FFFCFC</Color>
+    <Color x:Key="CheckedBoxColor">#FFBA00</Color>
+    
     <Color x:Key="NavigationBarColor">#9FE2BF</Color>
+    
     <Color x:Key="BackgroundEntryColor">#FFFCFC</Color>
     <Color x:Key="PlaceholderColor">#878787</Color>
     <Color x:Key="BorderColorFocused">Black</Color>
     <Color x:Key="InvalidDataColor">Red</Color>
+    <Color x:Key="DefaultLabelTextColor">Black</Color>
+    
+    <Color x:Key="WindowColor">#FFFCFC</Color>
+    <Color x:Key="BackgroundWindowColor">#80000000</Color>
 </ResourceDictionary>

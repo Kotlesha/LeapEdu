@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+             xmlns:idk="clr-namespace:Indiko.Maui.Controls.Markdown;assembly=Indiko.Maui.Controls.Markdown"
+             x:Class="LeapEdu.Controls.Popups.LegalNoticesPopup"
+             BackgroundColor="{StaticResource BackgroundWindowColor}">
+    <Border         
+        MaximumHeightRequest="800" 
+        WidthRequest="364"
+        StrokeThickness="0">
+        
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="27" />
+        </Border.StrokeShape>
+            
+        <Grid 
+            BackgroundColor="{StaticResource WindowColor}"
+            RowSpacing="20" 
+            RowDefinitions="Auto, 7*, Auto" >
+
+            <Label
+                Text="Политика конфиденциальности"
+                FontFamily="MontserratBold"
+                FontSize="25" 
+                Padding="20,20,20,0"
+                HorizontalTextAlignment="Center"
+                Grid.Row="0"/>
+
+            <ScrollView Grid.Row="1" HorizontalOptions="Fill">
+                <idk:MarkdownView 
+                    x:Name="markdownView"
+                    VerticalOptions="Fill"
+                    MarkdownText="# Привет" 
+                    H1FontSize="22"
+                    H2FontSize="20"
+                    H3FontSize="18"
+                    CodeBlockFontFace="CamingoCodeRegular"
+                    CodeBlockFontSize="12"
+                    BlockQuoteBackgroundColor="{StaticResource Yellow300Accent}"
+                    BlockQuoteTextColor="{StaticResource Black}"
+                    BlockQuoteBorderColor="{StaticResource Yellow100Accent}"
+                    BlockQuoteFontFace="CamingoCodeItalic"
+                    TextFontFace="MontserratRegular"
+                    TextFontSize="16"
+                    TextColor="{StaticResource Black}"
+                    TableHeaderBackgroundColor="{StaticResource Gray100}"
+                    TableHeaderFontFace="OpenSans"
+                    TableHeaderFontSize="13"
+                    TableHeaderTextColor="{StaticResource Gray900}"
+                    TableRowFontFace="OpenSans"
+                    TableRowFontSize="11"
+                    TableRowTextColor="{StaticResource Black}"
+                    ImageAspect="Fill"
+                    HyperlinkColor="{StaticResource Blue100Accent}"
+                    LineColor="{StaticResource GrayQuoteBorder}"
+                    LineHeightMultiplier="1.2"
+                    LineBreakModeText="WordWrap"
+                    Padding="20,0,20,0"
+                    Margin="0">
+                </idk:MarkdownView>
+            </ScrollView>
+
+            <Button 
+                Text="Выйти"
+                FontFamily="MontserratBold"
+                BackgroundColor="{StaticResource BackgroundButtonColor}"
+                FontSize="16"
+                CornerRadius="0"
+                HeightRequest="60"
+                VerticalOptions="End"
+                Pressed="BackToRegister_Pressed"
+                Grid.Row="2"/>
+        </Grid>
+    </Border>
+</mopups:PopupPage>

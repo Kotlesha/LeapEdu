@@ -12,6 +12,7 @@ public class RegisterViewModel : ObservableObject
     public ValidatableObject<string> Email { get; private set; }
     public ValidatableObject<string> Password { get; private set; }
     public ValidatableObject<string> PasswordConfirmation { get; private set; }
+    public ValidatableObject<bool> TermsAccepted { get; private set; }
 
     public RegisterViewModel()
     {
@@ -20,6 +21,7 @@ public class RegisterViewModel : ObservableObject
         Email = new();
         Password = new();
         PasswordConfirmation = new();
+        TermsAccepted = new();
 
         AddValidations();
     }
@@ -51,19 +53,22 @@ public class RegisterViewModel : ObservableObject
             new IsNotNullOrEmptyRule<string>(),
             new MatchFieldRule<string>(Password)
         ]);
+
+        TermsAccepted.Validations.Add(new IsCheckedRule<bool>());
     }
 
     public bool Validate()
     {
         bool isValid = true;
 
-        var fields = new[]
+        var fields = new IValidity[]
         {
             Surname,
             Name,
             Email,
             Password,
-            PasswordConfirmation
+            PasswordConfirmation,
+            TermsAccepted
         };
 
         foreach (var field in fields) field.ClearState();

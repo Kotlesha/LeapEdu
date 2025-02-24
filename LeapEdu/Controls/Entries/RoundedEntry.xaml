@@ -26,7 +26,6 @@
                     FontFamily="MontserratSemiBold"
                     IsPassword="{Binding ShowPassword, Source={x:Reference Root}}"
                     FontSize="17"
-                    TextChanged="EntryField_TextChanged"
                     Focused="EntryField_Focused"
                     Unfocused="EntryField_Unfocused"
                     VerticalOptions="Center"
@@ -44,7 +43,7 @@
         </Border>
 
         <Grid ColumnDefinitions="Auto, *"
-              IsVisible="{Binding IsValid, Source={x:Reference Root}, Converter={StaticResource BoolToVisibilityConverter}}" 
+              IsVisible="{Binding IsValid, Source={x:Reference Root}, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}}" 
               ColumnSpacing="5"
               Padding="13,0,30,0">
             <Image 

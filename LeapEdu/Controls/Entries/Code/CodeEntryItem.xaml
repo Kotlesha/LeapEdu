@@ -8,7 +8,8 @@
         <Border
             x:Name="EntryBorder"
             Stroke="{StaticResource BackgroundEntryColor}"
-            Background="{StaticResource BackgroundEntryColor}">
+            Background="{StaticResource BackgroundEntryColor}"
+            StrokeThickness="2">
 
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="{Binding CornerRadius, Source={x:Reference Root}}" />

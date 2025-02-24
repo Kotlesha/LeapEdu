@@ -2,20 +2,22 @@
 
 namespace LeapEdu.Converters;
 
-public class PasswordVisibilityIconConverter : IValueConverter
+public class TimeRemainingToStringConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is bool isPasswordVisible)
+        int remainingSeconds = (int)value;
+
+        if (remainingSeconds > 0)
         {
-            return isPasswordVisible ? "open_eye_icon.svg" : "close_eye_icon.svg";
+            return $"{remainingSeconds / 60:D2}:{remainingSeconds % 60:D2}";
         }
 
-        return null;
+        return "сейчас";
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        return null;
+        throw new NotImplementedException();
     }
 }

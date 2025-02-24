@@ -76,6 +76,8 @@ public partial class RoundedEntry : ContentView
             typeof(RoundedEntry), 
             "close_eye_icon.svg");
 
+    public string Text => EntryField?.Text ?? string.Empty;
+
     public string Value
     {
         get => (string)GetValue(ValueProperty);
@@ -138,11 +140,8 @@ public partial class RoundedEntry : ContentView
 
     public RoundedEntry() => InitializeComponent();
 
-    private void EntryField_Focused(object sender, FocusEventArgs e)
-    {
-        var border = this.FindByName<Border>("EntryBorder");
-        border.Stroke = Application.Current!.Resources["BorderColorFocused"] as Color;
-    }
+    private void EntryField_Focused(object sender, FocusEventArgs e) 
+        => EntryBorder.Stroke = Application.Current!.Resources["BorderColorFocused"] as Color;
 
     private void EntryField_Unfocused(object sender, FocusEventArgs e) => UpdateBorderColor();
 
@@ -159,28 +158,20 @@ public partial class RoundedEntry : ContentView
             entry.ShowPassword = showPassword;
     }
 
-    private void EntryField_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        if (!IsValid) IsValid = true;
-    }
-
     private void UpdateBorderColor()
     {
-        var border = this.FindByName<Border>("EntryBorder");
-        var entry = this.FindByName<Entry>("EntryField");
-
         var resources = Application.Current!.Resources;
 
         var validColor = (Color)resources["BackgroundEntryColor"];
         var focusedColor = (Color)resources["BorderColorFocused"];
         var invalidColor = (Color)resources["InvalidDataColor"];
 
-        if (entry.IsFocused)
+        if (EntryField.IsFocused)
         {
-            border.Stroke = focusedColor;
+            EntryBorder.Stroke = focusedColor;
             return;
         }
 
-        border.Stroke = IsValid ? validColor : invalidColor;
+        EntryBorder.Stroke = IsValid ? validColor : invalidColor;
     }
 }

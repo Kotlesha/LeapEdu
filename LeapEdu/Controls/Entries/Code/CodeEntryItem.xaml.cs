@@ -5,8 +5,6 @@ namespace LeapEdu.Controls.Entries.Code;
 
 public partial class CodeEntryItem : ContentView
 {
-    private BackspaceEntry? _codeEntryItem;
-
     public static readonly BindableProperty CornerRadiusProperty =
         BindableProperty.Create(
             nameof(CornerRadius),
@@ -28,6 +26,15 @@ public partial class CodeEntryItem : ContentView
             typeof(CodeEntryItem),
             default(ICommand));
 
+    public static readonly BindableProperty CodeChangedCommandProperty =
+        BindableProperty.Create(
+            nameof(CodeChangedCommand),
+            typeof(ICommand),
+            typeof(CodeEntryItem),
+            default(ICommand));
+
+    public string Text => CodeEntry?.Text ?? string.Empty;
+
     public int CornerRadius
     {
         get => (int)GetValue(CornerRadiusProperty);
@@ -46,57 +53,51 @@ public partial class CodeEntryItem : ContentView
         set => SetValue(NextFocusCommandProperty, value);
     }
 
+    public ICommand CodeChangedCommand
+    {
+        get => (ICommand)GetValue(CodeChangedCommandProperty);
+        set => SetValue(CodeChangedCommandProperty, value);
+    }
+
     public CodeEntryItem()
     {
         InitializeComponent();
 
-        _codeEntryItem = this.FindByName<BackspaceEntry>("CodeEntry");
-        _codeEntryItem.BackspacePressedOnEmpty += CodeEntryItem_BackspacePressedOnEmpty;
+        CodeEntry.BackspacePressedOnEmpty += CodeEntryItem_BackspacePressedOnEmpty;
     }
 
-    private void CodeEntryItem_Focused(object sender, FocusEventArgs e)
-    {
-        var border = this.FindByName<Border>("EntryBorder");
-        border.Stroke = Colors.Black;
-    }
+    private void CodeEntryItem_Focused(object sender, FocusEventArgs e) 
+        => EntryBorder.Stroke = Colors.Black;
 
-    private void CodeEntryItem_Unfocused(object sender, FocusEventArgs e)
-    {
-        var border = this.FindByName<Border>("EntryBorder");
-        border.Stroke = Application.Current!.Resources["BackgroundEntryColor"] as Color;
-    }
+    private void CodeEntryItem_Unfocused(object sender, FocusEventArgs e) 
+        => EntryBorder.Stroke = Application.Current!.Resources["BackgroundEntryColor"] as Color;
 
-    public void FocusCodeEntryItem()
-    {
-        var entry = this.FindByName<BackspaceEntry>("CodeEntry");
-        entry.Focus();
-    }
+    public void FocusCodeEntryItem() => CodeEntry.Focus();
 
     private void CodeEntryItem_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (!int.TryParse(e.NewTextValue, out _))
+        if (!int.TryParse(e.NewTextValue, out _) && ! string.IsNullOrEmpty(e.NewTextValue))
         {
-            var entry = this.FindByName<Entry>("CodeEntry");
-            entry.Text = string.Empty;
+            CodeEntry.Text = string.Empty;
             return;
         }
 
         if (e.NewTextValue?.Length == 1) NextFocusCommand.ExecuteIfCan(this);
+
+        CodeChangedCommand?.ExecuteIfCan(this);
     }
 
     private void CodeEntryItem_BackspacePressedOnEmpty(object? sender, EventArgs e)
     {
         PreviousFocusCommand.ExecuteIfCan(this);
+        CodeChangedCommand?.ExecuteIfCan(this);
     }
 
     protected override void OnHandlerChanged()
     {
         base.OnHandlerChanged();
 
-        if (Handler is null && _codeEntryItem is not null)
-        {
-            _codeEntryItem.BackspacePressedOnEmpty -= CodeEntryItem_BackspacePressedOnEmpty;
-            _codeEntryItem = null;
-        }
+        if (Handler is null)
+            CodeEntry.BackspacePressedOnEmpty -= CodeEntryItem_BackspacePressedOnEmpty;
     }
 }

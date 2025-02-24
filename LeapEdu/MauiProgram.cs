@@ -2,6 +2,10 @@
 using Microsoft.Extensions.Logging;
 using LeapEdu.Controls.Labels;
 using LeapEdu.Controls.Entries;
+using Mopups.Hosting;
+using LeapEdu.ViewModels;
+using LeapEdu.Views;
+using Mopups.Services;
 
 namespace LeapEdu;
 
@@ -13,26 +17,72 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-            .ConfigureFonts(fonts =>
-            {
-                fonts.AddFont("Montserrat-Bold.ttf", "MontserratBold");
-                fonts.AddFont("Montserrat-SemiBold.ttf", "MontserratSemiBold");
-                fonts.AddFont("Montserrat-Regular.ttf", "MontserratRegular");
-                fonts.AddFont("Montserrat-Medium.ttf", "MontserratMedium");
-            })
-            .ConfigureMauiHandlers(handlers =>
-            {
-#if ANDROID
-                handlers.AddHandler(typeof(Entry), typeof(Platforms.Android.Handlers.CustomEntryHandler));
-                handlers.AddHandler(typeof(BackspaceEntry), typeof(Platforms.Android.Handlers.BackspaceEntryHandler));
-                handlers.AddHandler(typeof(JustifyLabel), typeof(Platforms.Android.Handlers.JustifyLabelHandler));
-#endif
-            });
+            .RegisterServices()
+            .RegisterViewModels()
+            .RegisterViews()
+            .ConfigureMopups()
+            .ConfigureCustomFonts()
+            .ConfigureHandlers();
 
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
 
         return builder.Build();
+    }
+
+    public static MauiAppBuilder ConfigureCustomFonts(this MauiAppBuilder builder)
+    {
+        builder.ConfigureFonts(fonts =>
+        {
+            fonts.AddFont("Montserrat-Bold.ttf", "MontserratBold");
+            fonts.AddFont("Montserrat-SemiBold.ttf", "MontserratSemiBold");
+            fonts.AddFont("Montserrat-Regular.ttf", "MontserratRegular");
+            fonts.AddFont("Montserrat-Medium.ttf", "MontserratMedium");
+        });
+
+        return builder;
+    }
+
+    public static MauiAppBuilder ConfigureHandlers(this MauiAppBuilder builder)
+    {
+        builder.ConfigureMauiHandlers(handlers =>
+        {
+#if ANDROID
+            handlers.AddHandler(typeof(Entry), typeof(Platforms.Android.Handlers.CustomEntryHandler));
+            handlers.AddHandler(typeof(BackspaceEntry), typeof(Platforms.Android.Handlers.BackspaceEntryHandler));
+            handlers.AddHandler(typeof(JustifyLabel), typeof(Platforms.Android.Handlers.JustifyLabelHandler));
+#endif
+        });
+
+        return builder;
+    }
+
+    public static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
+    {
+        mauiAppBuilder.Services.AddSingleton(MopupService.Instance);
+
+        return mauiAppBuilder;
+    }
+
+    public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
+    {
+        mauiAppBuilder.Services.AddTransient<LoginViewModel>();
+        mauiAppBuilder.Services.AddTransient<LoginVerificationViewModel>();
+        mauiAppBuilder.Services.AddTransient<RegisterViewModel>();
+        mauiAppBuilder.Services.AddTransient<RepairPasswordViewModel>();
+
+        return mauiAppBuilder;
+    }
+
+    public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
+    {
+        mauiAppBuilder.Services.AddSingleton<AppShell>();
+        mauiAppBuilder.Services.AddTransient<LoginPage>();
+        mauiAppBuilder.Services.AddTransient<LoginVerificationPage>();
+        mauiAppBuilder.Services.AddTransient<RegisterPage>();
+        mauiAppBuilder.Services.AddTransient<RepairPasswordPage>();
+
+        return mauiAppBuilder;
     }
 }

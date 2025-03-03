@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markdownView="clr-namespace:Plugin.Maui.MarkdownView;assembly=Plugin.Maui.MarkdownView"
+             xmlns:justifiedLabel="clr-namespace:JustifyLabel;assembly=JustifyLabel"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <Color x:Key="MarkdownSpanHyperlinkTextColorLight">#9FE2BF</Color>
+    
+    <Style TargetType="Label" x:Key="MarkdownTextViewStyle">
+        <Setter Property="FontFamily" Value="MontserratRegular" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="TextColor" Value="{StaticResource DefaultLabelTextColor}" />
+        <Setter Property="Margin" Value="0,8,6,8" />
+        <Setter Property="LineBreakMode" Value="CharacterWrap" />
+        <Setter Property="LineHeight" Value="1.2" />
+        <Setter Property="justifiedLabel:Label.JustifyText" Value="True" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="MarkdownHeaderViewLevel1Style">
+        <Setter Property="FontFamily" Value="MontserratBold" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="TextColor" Value="{StaticResource DefaultLabelTextColor}" />
+        <Setter Property="Margin" Value="0,8,6,4" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="MarkdownHeaderViewLevel2Style"
+           BasedOn="{StaticResource MarkdownHeaderViewLevel1Style}">
+        <Setter Property="FontFamily" Value="MontserratBold" />
+        <Setter Property="FontSize" Value="22" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="MarkdownHeaderViewLevel3Style"
+           BasedOn="{StaticResource MarkdownHeaderViewLevel2Style}">
+        <Setter Property="FontFamily" Value="MontserratSemiBold" />
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="MarkdownHeaderViewLevel4Style"
+           BasedOn="{StaticResource MarkdownHeaderViewLevel3Style}">
+        <Setter Property="FontFamily" Value="MontserratSemiBold" />
+        <Setter Property="FontSize" Value="18" />
+    </Style>
+
+
+    <Style TargetType="Label" x:Key="MarkdownListItemBulletViewLevel1Style">
+        <Setter Property="FontFamily" Value="MontserratRegular" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="Margin">
+            <OnPlatform x:TypeArguments="Thickness" Default="4,0,5,0">
+                <On Platform="iOS" Value="4,1,5,0" />
+                <On Platform="Android" Value="4,0,5,0" />
+            </OnPlatform>
+        </Setter>
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="MarkdownListTextViewStyle">
+        <Setter Property="FontFamily" Value="MontserratRegular" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="TextColor" Value="{StaticResource DefaultLabelTextColor}" />
+        <Setter Property="Margin" Value="0,8,6,8" />
+        <Setter Property="justifiedLabel:Label.JustifyText" Value="True" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+</ResourceDictionary>

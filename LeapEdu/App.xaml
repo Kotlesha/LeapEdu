@@ -11,11 +11,12 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary Source="Resources/LeapEduStyles/LeapEduColors.xaml" />
                 <ResourceDictionary Source="Resources/LeapEduStyles/LeapEduStyles.xaml" />
+                <ResourceDictionary Source="Resources/LeapEduStyles/Markdown/LeapEduMardownStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <converters:PasswordVisibilityIconConverter x:Key="PasswordVisibilityIconConverter" />
-            <converters:BoolToColorAgreementLabelConverter x:Key="BoolToColorCheckBoxConverter" />
+            <converters:BoolToColorCheckBoxConverter x:Key="BoolToColorCheckBoxConverter" />
             <converters:BoolToColorAgreementLabelConverter x:Key="BoolToColorAgreementLabelConverter" />
             <converters:TimeRemainingToStringConverter x:Key="TimeRemainingToStringConverter" />
         </ResourceDictionary>

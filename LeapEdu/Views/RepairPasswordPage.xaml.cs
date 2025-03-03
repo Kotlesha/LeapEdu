@@ -1,35 +1,44 @@
-using CommunityToolkit.Maui.Core.Platform;
-using LeapEdu.Controls.Entries;
 using LeapEdu.Controls.Popups;
 using LeapEdu.ViewModels;
-using Mopups.Services;
-using System.Threading.Tasks;
+using LeapEdu.Views.Base;
+using Mopups.Interfaces;
 
 namespace LeapEdu.Views;
 
-public partial class RepairPasswordPage : ContentPage
+public partial class RepairPasswordPage : BasePage
 {
     private readonly RepairPasswordViewModel _repairPasswordViewModel;
+    private readonly IPopupNavigation _popupNavigation;
 
-    public RepairPasswordPage(RepairPasswordViewModel repairPasswordViewModel)
+    public RepairPasswordPage(
+        RepairPasswordViewModel repairPasswordViewModel, 
+        IPopupNavigation popupNavigation)
     {
         InitializeComponent();
 
         _repairPasswordViewModel = repairPasswordViewModel;
         BindingContext = repairPasswordViewModel;
-    }
+        _popupNavigation = popupNavigation;
 
-    private async void RemoveFocus(object sender, TappedEventArgs e)
-    {
-        var emailRoundedEntry = this.FindByName<RoundedEntry>("EmailRoundedEntry");
-        var emailEntry = emailRoundedEntry.FindByName<Entry>("EntryField");
-
-        await emailEntry.HideKeyboardAsync(CancellationToken.None);
+        RemoveFocusCommand = new Command(async () =>
+            await EmailForRepairEntry.RemoveFocusAsync(CancellationToken.None));
     }
 
     private async void RepairPasswordButton_Pressed(object sender, EventArgs e)
     {
         if (_repairPasswordViewModel.Validate())
-            await MopupService.Instance.PushAsync(new AlertPopup());
+        {
+            var closeCommand = new Command(async () =>
+            {
+                await _popupNavigation.PopAsync();
+                await _repairPasswordViewModel.GoBackAsync();
+            });
+
+            var alertPopupViewModel = new AlertPopupViewModel(
+                message: $"На вашу почту {EmailForRepairEntry.Text} отправлена ссылка для восстановления пароля!",
+                closeCommand: closeCommand);
+
+            await _popupNavigation.PushAsync(new AlertPopup(alertPopupViewModel));
+        }
     }
 }

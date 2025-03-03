@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LeapEdu.Controls.Entries.Code.CodeEntryItem"
              xmlns:entries="clr-namespace:LeapEdu.Controls.Entries"
-             x:Name="Root">
+             xmlns:models="clr-namespace:LeapEdu.Controls.Entries.Code"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="LeapEdu.Controls.Entries.Code.CodeEntryItem"
+             x:DataType="models:CodeEntryItem"
+             x:Name="CodeEntryItemRoot">
     <VerticalStackLayout>
         <Border
             x:Name="EntryBorder"
-            Stroke="{StaticResource BackgroundEntryColor}"
-            Background="{StaticResource BackgroundEntryColor}"
+            Stroke="{toolkit:AppThemeResource BackgroundEntryColor}"
+            Background="{toolkit:AppThemeResource BackgroundEntryColor}"
             StrokeThickness="2">
 
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="{Binding CornerRadius, Source={x:Reference Root}}" />
+                <RoundRectangle CornerRadius="{Binding CornerRadius, Source={x:Reference CodeEntryItemRoot}}" />
             </Border.StrokeShape>
 
             <entries:BackspaceEntry 
-                x:Name="CodeEntry"
+                x:Name="Entry"
                 Keyboard="Numeric"
                 MaxLength="1"
                 WidthRequest="44" 

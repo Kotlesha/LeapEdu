@@ -2,75 +2,64 @@
 <mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
-             xmlns:idk="clr-namespace:Indiko.Maui.Controls.Markdown;assembly=Indiko.Maui.Controls.Markdown"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mdv="clr-namespace:Plugin.Maui.MarkdownView;assembly=Plugin.Maui.MarkdownView"
+             xmlns:mdvs="clr-namespace:Plugin.Maui.MarkdownView.ViewSuppliers;assembly=Plugin.Maui.MarkdownView"
+             xmlns:styles="clr-namespace:LeapEdu.Resources.LeapEduStyles.Markdown"
+             xmlns:viewmodels="clr-namespace:LeapEdu.ViewModels"
+             x:DataType="viewmodels:LegalNoticiesViewModel"
              x:Class="LeapEdu.Controls.Popups.LegalNoticesPopup"
              BackgroundColor="{StaticResource BackgroundWindowColor}">
     <Border         
         MaximumHeightRequest="800" 
         WidthRequest="364"
         StrokeThickness="0">
-        
+
         <Border.StrokeShape>
             <RoundRectangle CornerRadius="27" />
         </Border.StrokeShape>
-            
+        
         <Grid 
             BackgroundColor="{StaticResource WindowColor}"
             RowSpacing="20" 
-            RowDefinitions="Auto, 7*, Auto" >
+            RowDefinitions="*, Auto" >
 
-            <Label
-                Text="Политика конфиденциальности"
-                FontFamily="MontserratBold"
-                FontSize="25" 
-                Padding="20,20,20,0"
-                HorizontalTextAlignment="Center"
-                Grid.Row="0"/>
+            <ActivityIndicator 
+                x:Name="ActivityIndicatorItem"
+                IsRunning="{Binding IsRunning}"
+                IsVisible="{Binding IsRunning}"
+                WidthRequest="50"
+                HeightRequest="50"
+                Color="{StaticResource BackgroundActivityIndicatorColor}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"/>
 
-            <ScrollView Grid.Row="1" HorizontalOptions="Fill">
-                <idk:MarkdownView 
-                    x:Name="markdownView"
-                    VerticalOptions="Fill"
-                    MarkdownText="# Привет" 
-                    H1FontSize="22"
-                    H2FontSize="20"
-                    H3FontSize="18"
-                    CodeBlockFontFace="CamingoCodeRegular"
-                    CodeBlockFontSize="12"
-                    BlockQuoteBackgroundColor="{StaticResource Yellow300Accent}"
-                    BlockQuoteTextColor="{StaticResource Black}"
-                    BlockQuoteBorderColor="{StaticResource Yellow100Accent}"
-                    BlockQuoteFontFace="CamingoCodeItalic"
-                    TextFontFace="MontserratRegular"
-                    TextFontSize="16"
-                    TextColor="{StaticResource Black}"
-                    TableHeaderBackgroundColor="{StaticResource Gray100}"
-                    TableHeaderFontFace="OpenSans"
-                    TableHeaderFontSize="13"
-                    TableHeaderTextColor="{StaticResource Gray900}"
-                    TableRowFontFace="OpenSans"
-                    TableRowFontSize="11"
-                    TableRowTextColor="{StaticResource Black}"
-                    ImageAspect="Fill"
-                    HyperlinkColor="{StaticResource Blue100Accent}"
-                    LineColor="{StaticResource GrayQuoteBorder}"
-                    LineHeightMultiplier="1.2"
-                    LineBreakModeText="WordWrap"
-                    Padding="20,0,20,0"
-                    Margin="0">
-                </idk:MarkdownView>
+            <ScrollView Grid.Row="0" IsVisible="{Binding IsVisibleText}">
+                <mdv:MarkdownView Padding="20" mdv:MarkdownText="{Binding Data}">
+                    <mdv:MarkdownView.ViewSupplier>
+                        <mdvs:MauiFormattedTextViewSupplier>
+                            <mdvs:MauiBasicViewSupplier.Styles>
+                                <styles:LeapEduBasicViewSupplierStyles />
+                            </mdvs:MauiBasicViewSupplier.Styles>
+
+                            <mdvs:MauiFormattedTextViewSupplier.FormattedTextStyles>
+                                <styles:LeapEduFormattedTextViewSupplierStyles />
+                            </mdvs:MauiFormattedTextViewSupplier.FormattedTextStyles>
+                        </mdvs:MauiFormattedTextViewSupplier>
+                    </mdv:MarkdownView.ViewSupplier>
+                </mdv:MarkdownView>
             </ScrollView>
 
             <Button 
                 Text="Выйти"
                 FontFamily="MontserratBold"
-                BackgroundColor="{StaticResource BackgroundButtonColor}"
+                BackgroundColor="{toolkit:AppThemeResource BackgroundButtonColor}"
                 FontSize="16"
                 CornerRadius="0"
                 HeightRequest="60"
                 VerticalOptions="End"
                 Pressed="BackToRegister_Pressed"
-                Grid.Row="2"/>
+                Grid.Row="1"/>
         </Grid>
     </Border>
 </mopups:PopupPage>

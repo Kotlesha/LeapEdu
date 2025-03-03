@@ -1,11 +1,9 @@
-using CommunityToolkit.Maui.Core.Platform;
-using LeapEdu.Controls.Entries;
 using LeapEdu.ViewModels;
-using System.Net;
+using LeapEdu.Views.Base;
 
 namespace LeapEdu.Views;
 
-public partial class LoginPage : ContentPage
+public partial class LoginPage : BasePage
 {
     private readonly LoginViewModel _loginViewModel;
 
@@ -15,28 +13,26 @@ public partial class LoginPage : ContentPage
 
         _loginViewModel = loginViewModel;
         BindingContext = loginViewModel;
+
+        RemoveFocusCommand = new Command(async () =>
+            await EmailEntry.RemoveFocusAsync(CancellationToken.None));
     }
 
     private async void SignIn_Button_Pressed(object sender, EventArgs e)
     {
         if (_loginViewModel.Validate())
         {
-            var encodedEmail = WebUtility.UrlEncode(EmailEntry.Text);
-            await Shell.Current.GoToAsync($"loginVerification?Email={encodedEmail}", true);
+            await _loginViewModel.NavigateToAsync<LoginVerificationPage>(
+                new Dictionary<string, object>
+                {
+                    ["Email"] = EmailEntry.Text
+                });
         }
     }
 
     private async void RegisterLabel_Tapped(object sender, TappedEventArgs e) 
-        => await Shell.Current.GoToAsync("register", true);
+        => await _loginViewModel.NavigateToAsync<RegisterPage>();
 
     private async void RepairPassword_Tapped(object sender, TappedEventArgs e) 
-        => await Shell.Current.GoToAsync("repairPassword", true);
-
-    private async void RemoveFocus(object sender, TappedEventArgs e)
-    {
-        var emailRoundedEntry = this.FindByName<RoundedEntry>("EmailEntry");
-        var emailEntry = emailRoundedEntry.FindByName<Entry>("EntryField");
-
-        await emailEntry.HideKeyboardAsync(CancellationToken.None);
-    }
+        => await _loginViewModel.NavigateToAsync<RepairPasswordPage>();
 }

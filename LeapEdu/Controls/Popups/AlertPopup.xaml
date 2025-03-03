@@ -2,40 +2,44 @@
 <mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+             xmlns:labels="clr-namespace:LeapEdu.Controls.Labels"
+             xmlns:viewmodels="clr-namespace:LeapEdu.ViewModels"
+             xmlns:justifiedLabel="clr-namespace:JustifyLabel;assembly=JustifyLabel"
+             x:DataType="viewmodels:AlertPopupViewModel"
              x:Class="LeapEdu.Controls.Popups.AlertPopup"
              BackgroundColor="{StaticResource BackgroundWindowColor}"
              Title="AlertPopup">
     <Border
-        MaximumHeightRequest="300"
-        MaximumWidthRequest="364">
+        MaximumWidthRequest="364"
+        BackgroundColor="{StaticResource WindowColor}"
+        VerticalOptions="Center"
+        HorizontalOptions="Center">
         <Border.StrokeShape>
             <RoundRectangle CornerRadius="27" />
         </Border.StrokeShape>
-        
-        <Grid 
-            Padding="20"
-            RowDefinitions="*,2*,*" 
-            BackgroundColor="{StaticResource WindowColor}"
-            RowSpacing="20">
-            
+
+        <StackLayout Padding="20" Spacing="22">
             <Label 
-                Text="Уведомление"
+                Text="{Binding Title}"
                 FontFamily="MontserratBold"
                 FontSize="26"
-                Grid.Row="0"/>
-            
+                MaxLines="2"
+                LineBreakMode="TailTruncation"/>
+
             <Label
-                Text="Привет!"
+                Text="{Binding Message}"
                 FontFamily="MontserratRegular"
+                CharacterSpacing="-1"
+                justifiedLabel:Label.JustifyText="True"
                 FontSize="18"
-                Grid.Row="1" />
-            
+                MaxLines="10"
+                LineBreakMode="WordWrap"/>
+
             <Button 
-                Text="Понятно"
+                Text="{Binding ButtonText}"
                 Style="{StaticResource DefaultButtonStyle}"
-                Padding="9,13,9,13"
                 HorizontalOptions="Center"
-                Grid.Row="2"/>
-        </Grid>
+                Command="{Binding CloseCommand}"/>
+        </StackLayout>
     </Border>
 </mopups:PopupPage>

@@ -1,11 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using LeapEdu.Services.Interfaces;
 using LeapEdu.Validation.Implementations;
 using LeapEdu.Validation.Implementations.Rules;
 using LeapEdu.Validation.Interfaces;
+using LeapEdu.ViewModels.Base;
 
 namespace LeapEdu.ViewModels;
 
-public class RegisterViewModel : ObservableObject
+public partial class RegisterViewModel : BaseNavigationModel
 {
     public ValidatableObject<string> Surname { get; private set; }
     public ValidatableObject<string> Name { get; private set; }
@@ -14,7 +15,8 @@ public class RegisterViewModel : ObservableObject
     public ValidatableObject<string> PasswordConfirmation { get; private set; }
     public ValidatableObject<bool> TermsAccepted { get; private set; }
 
-    public RegisterViewModel()
+    public RegisterViewModel(INavigationService navigationService)
+        : base(navigationService)
     {
         Surname = new();
         Name = new();
@@ -70,8 +72,6 @@ public class RegisterViewModel : ObservableObject
             PasswordConfirmation,
             TermsAccepted
         };
-
-        foreach (var field in fields) field.ClearState();
 
         foreach (var field in fields)
             if (!field.Validate()) isValid = false;

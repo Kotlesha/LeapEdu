@@ -1,4 +1,6 @@
-﻿namespace LeapEdu;
+﻿using LeapEdu.Views;
+
+namespace LeapEdu;
 
 public partial class App : Application
 {
@@ -6,6 +8,11 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        MainPage = serviceProvider.GetRequiredService<AppShell>();
+        var loginPage = serviceProvider.GetRequiredService<LoginPage>();
+
+        MainPage = new NavigationPage(loginPage)
+        {
+            BackgroundColor = App.Current.Resources["BackgroundColor"] as Color
+        };
     }
 }

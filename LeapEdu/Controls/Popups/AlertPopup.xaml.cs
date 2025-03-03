@@ -1,11 +1,14 @@
+using LeapEdu.ViewModels;
 using Mopups.Pages;
 
 namespace LeapEdu.Controls.Popups;
 
 public partial class AlertPopup : PopupPage
 {
-	public AlertPopup()
-	{
-		InitializeComponent();
-	}
+    public AlertPopup(AlertPopupViewModel alertPopupViewModel)
+    {
+        InitializeComponent();
+
+        BindingContext = alertPopupViewModel;
+    }
 }

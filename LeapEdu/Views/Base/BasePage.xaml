@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:baseviews="clr-namespace:LeapEdu.Views.Base"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="LeapEdu.Views.Base.BasePage"
+             BackgroundColor="{toolkit:AppThemeResource BackgroundColor}"
+             NavigationPage.HasNavigationBar="False"
+             x:Name="Root">
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="{toolkit:AppThemeResource BackgroundColor}" StatusBarStyle="DarkContent" />
+    </Page.Behaviors>
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <Grid RowDefinitions="60, *">
+                <Button
+                    Text="Назад"
+                    ImageSource="back_button_icon.png"
+                    Command="{Binding BackCommand, Source={x:Reference Root}}"
+                    Style="{StaticResource DefaultButtonStyle}"
+                    IsVisible="{TemplateBinding ShowBackButton}"
+                    Margin="27,10,0,0"
+                    Padding="10"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    Grid.Row="0"/>
+
+                <ScrollView VerticalScrollBarVisibility="Never" Grid.Row="1">
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RemoveFocusCommand, Source={x:Reference Root}}" />
+                        </StackLayout.GestureRecognizers>
+
+                        <Image 
+                            Source="frog_background_image.png" 
+                            MaximumHeightRequest="220" 
+                            Aspect="Center"/>
+
+                        <ContentPresenter />
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+</ContentPage>

@@ -38,6 +38,10 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
+	  <MtouchDebug>True</MtouchDebug>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -56,26 +60,36 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\drawable\leap_edu_drawable.xml" />
+	  <None Remove="Platforms\Android\Resources\values\styles.xml" />
+	  <None Remove="Resources\Images\ButtonIcons\back_button_icon.svg" />
+	  <None Remove="Resources\Images\ButtonIcons\Password\question_icon.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="Indiko.Maui.Controls.Markdown" Version="1.2.1" />
+		<PackageReference Include="JustifyLabel-MAUI" Version="1.0.2" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 		<PackageReference Include="Mopups" Version="1.3.2" />
+		<PackageReference Include="Plugin.Maui.MarkdownView" Version="1.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <MauiImage Include="Resources\Images\ButtonIcons\back_button_icon.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Password\close_eye_icon.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Auth\google_icon.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Auth\microsoft_icon.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Password\open_eye_icon.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Auth\telegram_icon.svg" />
+	  <MauiImage Include="Resources\Images\ButtonIcons\Password\question_icon.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\retry_icon.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ApplicationDefinition Include="Platforms\Android\Resources\values\styles.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -104,6 +118,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\LeapEduStyles\LeapEduStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\LeapEduStyles\Markdown\LeapEduMardownStyles.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Base\BasePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">

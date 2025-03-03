@@ -1,7 +1,7 @@
+using CommunityToolkit.Maui.Core.Platform;
 using System.Windows.Input;
 
 namespace LeapEdu.Controls.Entries.Code;
-
 
 public partial class CodeEntry : ContentView
 {
@@ -62,5 +62,14 @@ public partial class CodeEntry : ContentView
         Code = string.Concat(CodeGrid.Children
             .OfType<CodeEntryItem>()
             .Select(item => item.Text));
+    }
+
+    public async Task RemoveFocusAsync(CancellationToken cancellationToken = default)
+    {
+        var codeEntryItem = CodeGrid.Children.FirstOrDefault() as CodeEntryItem;
+        var enrty = codeEntryItem.FindByName<Entry>("Entry");
+
+        if (enrty.IsSoftInputShowing())
+            await enrty.HideKeyboardAsync(cancellationToken);
     }
 }

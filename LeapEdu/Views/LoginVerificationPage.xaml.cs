@@ -1,10 +1,9 @@
-using CommunityToolkit.Maui.Core.Platform;
-using LeapEdu.Controls.Entries.Code;
 using LeapEdu.ViewModels;
+using LeapEdu.Views.Base;
 
 namespace LeapEdu.Views;
 
-public partial class LoginVerificationPage : ContentPage
+public partial class LoginVerificationPage : BasePage
 {
     private readonly LoginVerificationViewModel _loginVerificationViewModel;
 
@@ -14,15 +13,9 @@ public partial class LoginVerificationPage : ContentPage
 
         _loginVerificationViewModel = loginVerificationViewModel;
         BindingContext = loginVerificationViewModel;
-    }
 
-    private async void RemoveFocus(object sender, TappedEventArgs e)
-    {
-        var grid = CodeEntryPanel.FindByName<Grid>("CodeGrid");
-        var codeEntryItem = grid.Children.FirstOrDefault() as CodeEntryItem;
-        var enrty = codeEntryItem.FindByName<Entry>("CodeEntry");
-
-        await enrty.HideKeyboardAsync(CancellationToken.None);
+        RemoveFocusCommand = new Command(async () => 
+            await CodeEntryPanel.RemoveFocusAsync(CancellationToken.None));
     }
 
     private void RetryButton_Pressed(object sender, EventArgs e) => _loginVerificationViewModel.RestartTimer();

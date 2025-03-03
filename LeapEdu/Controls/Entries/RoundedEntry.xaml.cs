@@ -1,3 +1,7 @@
+using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Core.Platform;
+using LeapEdu.Extensions;
+
 namespace LeapEdu.Controls.Entries;
 
 public partial class RoundedEntry : ContentView
@@ -22,7 +26,7 @@ public partial class RoundedEntry : ContentView
             nameof(CornerRadius),
             typeof(int),
             typeof(RoundedEntry),
-            27);
+            23);
 
     public static readonly BindableProperty MaxLengthProperty =
         BindableProperty.Create(
@@ -98,8 +102,8 @@ public partial class RoundedEntry : ContentView
 
     public int MaxLength
     {
-        get => (int)GetValue(CornerRadiusProperty);
-        set => SetValue(CornerRadiusProperty, value);
+        get => (int)GetValue(MaxLengthProperty);
+        set => SetValue(MaxLengthProperty, value);
     }
 
     public Keyboard KeyboardType
@@ -140,8 +144,7 @@ public partial class RoundedEntry : ContentView
 
     public RoundedEntry() => InitializeComponent();
 
-    private void EntryField_Focused(object sender, FocusEventArgs e) 
-        => EntryBorder.Stroke = Application.Current!.Resources["BorderColorFocused"] as Color;
+    private void EntryField_Focused(object sender, FocusEventArgs e) => UpdateBorderColor();
 
     private void EntryField_Unfocused(object sender, FocusEventArgs e) => UpdateBorderColor();
 
@@ -162,8 +165,8 @@ public partial class RoundedEntry : ContentView
     {
         var resources = Application.Current!.Resources;
 
-        var validColor = (Color)resources["BackgroundEntryColor"];
-        var focusedColor = (Color)resources["BorderColorFocused"];
+        var validColor = resources.GetAppThemeColor("BackgroundEntryColor");
+        var focusedColor = resources.GetAppThemeColor("BorderColorFocused");
         var invalidColor = (Color)resources["InvalidDataColor"];
 
         if (EntryField.IsFocused)
@@ -173,5 +176,11 @@ public partial class RoundedEntry : ContentView
         }
 
         EntryBorder.Stroke = IsValid ? validColor : invalidColor;
+    }
+
+    public async Task RemoveFocusAsync(CancellationToken cancellationToken = default)
+    {
+        if (EntryField.IsSoftInputShowing())
+            await EntryField.HideKeyboardAsync(cancellationToken);
     }
 }

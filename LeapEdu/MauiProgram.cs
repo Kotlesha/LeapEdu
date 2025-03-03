@@ -6,6 +6,8 @@ using Mopups.Hosting;
 using LeapEdu.ViewModels;
 using LeapEdu.Views;
 using Mopups.Services;
+using LeapEdu.Services.Interfaces;
+using LeapEdu.Services.Implementations;
 
 namespace LeapEdu;
 
@@ -51,7 +53,6 @@ public static class MauiProgram
 #if ANDROID
             handlers.AddHandler(typeof(Entry), typeof(Platforms.Android.Handlers.CustomEntryHandler));
             handlers.AddHandler(typeof(BackspaceEntry), typeof(Platforms.Android.Handlers.BackspaceEntryHandler));
-            handlers.AddHandler(typeof(JustifyLabel), typeof(Platforms.Android.Handlers.JustifyLabelHandler));
 #endif
         });
 
@@ -60,6 +61,7 @@ public static class MauiProgram
 
     public static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
     {
+        mauiAppBuilder.Services.AddSingleton<INavigationService, NavigationService>();
         mauiAppBuilder.Services.AddSingleton(MopupService.Instance);
 
         return mauiAppBuilder;
@@ -77,7 +79,6 @@ public static class MauiProgram
 
     public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
     {
-        mauiAppBuilder.Services.AddSingleton<AppShell>();
         mauiAppBuilder.Services.AddTransient<LoginPage>();
         mauiAppBuilder.Services.AddTransient<LoginVerificationPage>();
         mauiAppBuilder.Services.AddTransient<RegisterPage>();

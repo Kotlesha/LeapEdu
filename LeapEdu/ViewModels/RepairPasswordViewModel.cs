@@ -1,14 +1,16 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using LeapEdu.Services.Interfaces;
 using LeapEdu.Validation.Implementations;
 using LeapEdu.Validation.Implementations.Rules;
+using LeapEdu.ViewModels.Base;
 
 namespace LeapEdu.ViewModels;
 
-public class RepairPasswordViewModel : ObservableObject
+public partial class RepairPasswordViewModel : BaseNavigationModel
 {
     public ValidatableObject<string> Email { get; private set; }
 
-    public RepairPasswordViewModel()
+    public RepairPasswordViewModel(INavigationService navigationService)
+        : base(navigationService)
     {
         Email = new();
 
@@ -22,10 +24,5 @@ public class RepairPasswordViewModel : ObservableObject
             new EmailRule<string>()]);
     }
 
-    public bool Validate()
-    {
-        Email.ClearState();
-
-        return Email.Validate();
-    }
+    public bool Validate() => Email.Validate();
 }

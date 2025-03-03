@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="LeapEduTheme" parent="Maui.MainTheme.NoActionBar">
+    <item name="android:autofilledHighlight">@drawable/leap_edu_drawable</item>
+  </style>
+</resources>

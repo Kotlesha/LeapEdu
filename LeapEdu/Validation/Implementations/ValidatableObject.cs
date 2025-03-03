@@ -14,7 +14,7 @@ public class ValidatableObject<T> : ObservableObject, IValidity<T>
     public IEnumerable<string> Errors
     {
         get => _errors;
-        private set
+        set
         {
             if (SetProperty(ref _errors, value))
                 OnPropertyChanged(nameof(FirstError));
@@ -26,14 +26,13 @@ public class ValidatableObject<T> : ObservableObject, IValidity<T>
     public bool IsValid
     {
         get => _isValid;
-        private set => SetProperty(ref _isValid, value);
+        set => SetProperty(ref _isValid, value);
     }
 
     public T Value
     {
         get => _value;
         set {
-            
             if (SetProperty(ref _value, value))
             {
                 ClearState();

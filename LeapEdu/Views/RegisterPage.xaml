@@ -1,159 +1,157 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<baseviews:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:entries="clr-namespace:LeapEdu.Controls.Entries"
-             x:Class="LeapEdu.Views.RegisterPage"
              xmlns:viewmodels="clr-namespace:LeapEdu.ViewModels"
+             xmlns:baseviews="clr-namespace:LeapEdu.Views.Base"
+             x:Class="LeapEdu.Views.RegisterPage"
              x:DataType="viewmodels:RegisterViewModel"
-             Shell.BackgroundColor="{StaticResource BackgroundColor}"
-             BackgroundColor="{StaticResource BackgroundColor}">
-    <Page.Behaviors>
-        <mct:StatusBarBehavior StatusBarColor="{StaticResource BackgroundColor}" StatusBarStyle="DarkContent" />
-    </Page.Behaviors>
+             ShowBackButton="True">
+    <StackLayout Padding="27" Spacing="15" VerticalOptions="Center">
+        <Label
+            Text="Регистрация"
+            FontFamily="MontserratBold"
+            FontSize="28"
+            Padding="13,0,0,0"/>
 
-    <ScrollView VerticalScrollBarVisibility="Never">
-        <StackLayout>
-            <StackLayout.GestureRecognizers>
-                <TapGestureRecognizer Tapped="RemoveFocus" />
-            </StackLayout.GestureRecognizers>
-            
-            <Image 
-                Source="frog_background_image.png" 
-                MaximumHeightRequest="180" 
-                Aspect="Center"/>
+        <VerticalStackLayout>
+            <Label
+                Text="Фамилия"
+                Style="{StaticResource LabelStyleForEntry}" />
 
-            <StackLayout Padding="27" Spacing="15" VerticalOptions="Center">
+            <entries:RoundedEntry
+                x:Name="NameRoundedEntry"
+                PlaceholderText="Иванов"
+                Value="{Binding Surname.Value}"
+                IsValid="{Binding Surname.IsValid}"
+                ErrorMessage="{Binding Surname.FirstError}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Label
+                Text="Имя"
+                Style="{StaticResource LabelStyleForEntry}" />
+
+            <entries:RoundedEntry
+                PlaceholderText="Иван"
+                Value="{Binding Name.Value}"
+                IsValid="{Binding Name.IsValid}"
+                ErrorMessage="{Binding Name.FirstError}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Label
+                Text="Электронная почта"
+                Style="{StaticResource LabelStyleForEntry}" />
+
+            <entries:RoundedEntry
+                PlaceholderText="Andrey@example.com"
+                KeyboardType="{x:Static Keyboard.Email}"
+                Value="{Binding Email.Value}"
+                IsValid="{Binding Email.IsValid}"
+                ErrorMessage="{Binding Email.FirstError}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <HorizontalStackLayout Spacing="5">
                 <Label
-                    Text="Регистрация"
-                    FontFamily="MontserratBold"
-                    FontSize="28"
-                    Padding="13,0,0,0"/>
-                
-                <VerticalStackLayout>
-                    <Label 
-                        Text="Фамилия"
-                        Style="{StaticResource LabelStyleForEntry}" />
-                    
-                    <entries:RoundedEntry 
-                        x:Name="NameRoundedEntry"
-                        PlaceholderText="Иванов"
-                        Value="{Binding Surname.Value}"
-                        IsValid="{Binding Surname.IsValid}"
-                        ErrorMessage="{Binding Surname.FirstError}" />
-                </VerticalStackLayout>
+                    Text="Пароль"
+                    Style="{StaticResource LabelStyleForEntry}" />
 
-                <VerticalStackLayout>
-                    <Label 
-                        Text="Имя"
-                        Style="{StaticResource LabelStyleForEntry}" />
-                    
-                    <entries:RoundedEntry 
-                        PlaceholderText="Иван"
-                        Value="{Binding Name.Value}"
-                        IsValid="{Binding Name.IsValid}"
-                        ErrorMessage="{Binding Name.FirstError}" />
-                </VerticalStackLayout>
+                <ImageButton
+                    Source="question_icon.png"
+                    Pressed="PasswordQuestionButton_Pressed"
+                    WidthRequest="15"
+                    HeightRequest="15"/>
+            </HorizontalStackLayout>
 
-                <VerticalStackLayout>
-                    <Label 
-                        Text="Электронная почта"
-                        Style="{StaticResource LabelStyleForEntry}" />
+            <entries:RoundedEntry
+                PlaceholderText="Ваш пароль"
+                IsPasswordEntry="True"
+                Value="{Binding Password.Value}"
+                IsValid="{Binding Password.IsValid}"
+                ErrorMessage="{Binding Password.FirstError}" />
+        </VerticalStackLayout>
 
-                    <entries:RoundedEntry 
-                        PlaceholderText="Andrey@example.com" 
-                        KeyboardType="Email"
-                        Value="{Binding Email.Value}"
-                        IsValid="{Binding Email.IsValid}"
-                        ErrorMessage="{Binding Email.FirstError}" />
-                </VerticalStackLayout>
+        <VerticalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Label
+                    Text="Повторите пароль"
+                    Style="{StaticResource LabelStyleForEntry}" />
 
-                <VerticalStackLayout>
-                    <Label 
-                        Text="Пароль"
-                        Style="{StaticResource LabelStyleForEntry}" />
-                    
-                    <entries:RoundedEntry
-                        PlaceholderText="Ваш пароль"
-                        IsPasswordEntry="True"
-                        Value="{Binding Password.Value}"
-                        IsValid="{Binding Password.IsValid}"
-                        ErrorMessage="{Binding Password.FirstError}" />
-                </VerticalStackLayout>
+                <ImageButton 
+                    Source="question_icon.png" 
+                    Pressed="RepeatImageButton_Pressed"
+                    MaximumWidthRequest="15"
+                    MaximumHeightRequest="15"/>
+            </HorizontalStackLayout>
 
-                <VerticalStackLayout>
-                    <Label
-                        Text="Повторите пароль"
-                        Style="{StaticResource LabelStyleForEntry}" />
-                    
-                    <entries:RoundedEntry
-                        PlaceholderText="Повторите пароль"
-                        IsPasswordEntry="True"
-                        Value="{Binding PasswordConfirmation.Value}"
-                        IsValid="{Binding PasswordConfirmation.IsValid}"
-                        ErrorMessage="{Binding PasswordConfirmation.FirstError}" />
-                </VerticalStackLayout>
+            <entries:RoundedEntry
+                PlaceholderText="Повторите пароль"
+                IsPasswordEntry="True"
+                Value="{Binding PasswordConfirmation.Value}"
+                IsValid="{Binding PasswordConfirmation.IsValid}"
+                ErrorMessage="{Binding PasswordConfirmation.FirstError}" />
+        </VerticalStackLayout>
 
-                <Grid ColumnDefinitions="Auto,*" HorizontalOptions="Center">
-                    <CheckBox 
-                        Color="{Binding TermsAccepted.IsValid, Converter={StaticResource BoolToColorCheckBoxConverter}}"
-                        Grid.Column="0"
-                        IsChecked="{Binding TermsAccepted.Value}"
-                        VerticalOptions="Center"/>
-                    
-                    <Label
-                        x:Name="AgreementLabel"
-                        Grid.Column="1" 
-                        HorizontalTextAlignment="Center" 
-                        HorizontalOptions="Start"
-                        TextColor="{Binding TermsAccepted.IsValid, Converter={StaticResource BoolToColorAgreementLabelConverter}}">
-                        
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span 
-                                    Text="Вы согласны с нашей " 
-                                    FontFamily="MontserratRegular" 
-                                    FontSize="15"
-                                    TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}"/>
-                                
-                                <Span 
-                                    Text="Политикой конфиденциальности" 
-                                    FontFamily="MontserratSemiBold" 
-                                    FontSize="15"
-                                    TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}">
-                                    
-                                    <Span.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="PrivacyPolicy_Tapped" />
-                                    </Span.GestureRecognizers>
-                                </Span>
-                                
-                                <Span 
-                                    Text=" и " 
-                                    FontFamily="MontserratRegular" 
-                                    FontSize="15"
-                                    TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}"/>
+        <Grid ColumnDefinitions="Auto,*" HorizontalOptions="Center">
+            <CheckBox 
+                Color="{Binding TermsAccepted.IsValid, Converter={StaticResource BoolToColorCheckBoxConverter}}"
+                Grid.Column="0"
+                IsChecked="{Binding TermsAccepted.Value}"
+                VerticalOptions="Center"/>
 
-                                <Span 
-                                    Text="Условиями использования" 
-                                    FontFamily="MontserratSemiBold" 
-                                    FontSize="15"
-                                    TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}">
-                                    
-                                    <Span.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="TermsOfUse_Tapped" />
-                                    </Span.GestureRecognizers>
-                                </Span>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                </Grid>
-                
-                <Button 
-                    Text="Зарегистрироваться"
-                    Pressed="RegisterButton_Pressed"
-                    Style="{StaticResource DefaultButtonStyle}"
-                    Padding="9,13,9,13"/>
-            </StackLayout>
-        </StackLayout>
-    </ScrollView>
-</ContentPage>
+            <Label
+                x:Name="AgreementLabel"
+                Grid.Column="1"
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="Start"
+                TextColor="{Binding TermsAccepted.IsValid, Converter={StaticResource BoolToColorAgreementLabelConverter}}">
+
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span 
+                            Text="Вы согласны с нашей " 
+                            FontFamily="MontserratRegular"
+                            FontSize="15"
+                            TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}"/>
+
+                        <Span
+                            Text="Политикой конфиденциальности"
+                            FontFamily="MontserratSemiBold"
+                            FontSize="15"
+                            TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}">
+
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PrivacyPolicy_Tapped" />
+                            </Span.GestureRecognizers>
+                        </Span>
+
+                        <Span
+                            Text=" и " 
+                            FontFamily="MontserratRegular"
+                            FontSize="15"
+                            TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}"/>
+
+                        <Span
+                            Text="Условиями использования"
+                            FontFamily="MontserratSemiBold"
+                            FontSize="15"
+                            TextColor="{Binding Source={x:Reference AgreementLabel}, Path=TextColor}">
+
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TermsOfUse_Tapped" />
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+
+        <Button 
+            Text="Зарегистрироваться"
+            Pressed="RegisterButton_Pressed"
+            Style="{StaticResource DefaultButtonStyle}"/>
+    </StackLayout>
+</baseviews:BasePage>

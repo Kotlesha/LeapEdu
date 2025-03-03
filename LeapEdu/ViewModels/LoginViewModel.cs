@@ -1,15 +1,17 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using LeapEdu.Services.Interfaces;
 using LeapEdu.Validation.Implementations;
 using LeapEdu.Validation.Implementations.Rules;
+using LeapEdu.ViewModels.Base;
 
 namespace LeapEdu.ViewModels;
 
-public class LoginViewModel : ObservableObject
+public partial class LoginViewModel : BaseNavigationModel
 {
     public ValidatableObject<string> Email { get; private set; }
     public ValidatableObject<string> Password { get; private set; }
 
-    public LoginViewModel()
+    public LoginViewModel(INavigationService navigationService)
+        : base(navigationService)
     {
         Email = new();
         Password = new();
@@ -28,9 +30,6 @@ public class LoginViewModel : ObservableObject
 
     public bool Validate()
     {
-        Email.ClearState();
-        Password.ClearState();
-
         var isValidEmail = Email.Validate();
         var isValidPassword = Password.Validate();
         return isValidEmail && isValidPassword;

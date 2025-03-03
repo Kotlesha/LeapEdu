@@ -33,7 +33,7 @@ public partial class CodeEntryItem : ContentView
             typeof(CodeEntryItem),
             default(ICommand));
 
-    public string Text => CodeEntry?.Text ?? string.Empty;
+    public string Text => Entry?.Text ?? string.Empty;
 
     public int CornerRadius
     {
@@ -63,22 +63,22 @@ public partial class CodeEntryItem : ContentView
     {
         InitializeComponent();
 
-        CodeEntry.BackspacePressedOnEmpty += CodeEntryItem_BackspacePressedOnEmpty;
+        Entry.BackspacePressedOnEmpty += CodeEntryItem_BackspacePressedOnEmpty;
     }
 
     private void CodeEntryItem_Focused(object sender, FocusEventArgs e) 
         => EntryBorder.Stroke = Colors.Black;
 
     private void CodeEntryItem_Unfocused(object sender, FocusEventArgs e) 
-        => EntryBorder.Stroke = Application.Current!.Resources["BackgroundEntryColor"] as Color;
+        => EntryBorder.Stroke = Application.Current!.Resources.GetAppThemeColor("BackgroundEntryColor");
 
-    public void FocusCodeEntryItem() => CodeEntry.Focus();
+    public void FocusCodeEntryItem() => Entry.Focus();
 
     private void CodeEntryItem_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (!int.TryParse(e.NewTextValue, out _) && ! string.IsNullOrEmpty(e.NewTextValue))
+        if (!int.TryParse(e.NewTextValue, out _) && !string.IsNullOrEmpty(e.NewTextValue))
         {
-            CodeEntry.Text = string.Empty;
+            Entry.Text = string.Empty;
             return;
         }
 
@@ -98,6 +98,6 @@ public partial class CodeEntryItem : ContentView
         base.OnHandlerChanged();
 
         if (Handler is null)
-            CodeEntry.BackspacePressedOnEmpty -= CodeEntryItem_BackspacePressedOnEmpty;
+            Entry.BackspacePressedOnEmpty -= CodeEntryItem_BackspacePressedOnEmpty;
     }
 }

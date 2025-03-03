@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:justifiedLabel="clr-namespace:JustifyLabel;assembly=JustifyLabel" 
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:LeapEdu.Controls.Entries"
+             x:DataType="controls:RoundedEntry"
              x:Class="LeapEdu.Controls.Entries.RoundedEntry"
-             xmlns:labels="clr-namespace:LeapEdu.Controls.Labels"
-             x:Name="Root">
-    <VerticalStackLayout>
+             x:Name="RoundedEntryRoot" >
+    <VerticalStackLayout BindingContext="{x:Reference RoundedEntryRoot}">
         <Border 
             x:Name="EntryBorder"
             Padding="15,0,10,0"
-            Stroke="{StaticResource BackgroundEntryColor}"
+            Stroke="{toolkit:AppThemeResource BackgroundEntryColor}"
             StrokeThickness="2"
-            Background="{StaticResource BackgroundEntryColor}">
+            Background="{toolkit:AppThemeResource BackgroundEntryColor}">
 
             <Border.StrokeShape>
                 <RoundRectangle 
-                    CornerRadius="{Binding CornerRadius, Source={x:Reference Root}}"/>
+                    CornerRadius="{Binding CornerRadius}"/>
             </Border.StrokeShape>
 
             <Grid Padding="15,0,15,0" HeightRequest="54" ColumnDefinitions="*,Auto">
                 <Entry
                     x:Name="EntryField"
-                    Text="{Binding Value, Source={x:Reference Root}}"
-                    Placeholder="{Binding PlaceholderText, Source={x:Reference Root}}"
-                    PlaceholderColor="{StaticResource PlaceholderColor}"
+                    Text="{Binding Value, Mode=TwoWay, Source={x:Reference RoundedEntryRoot}}"
+                    Placeholder="{Binding PlaceholderText}"
+                    PlaceholderColor="{toolkit:AppThemeResource PlaceholderColor}"
                     FontFamily="MontserratSemiBold"
-                    IsPassword="{Binding ShowPassword, Source={x:Reference Root}}"
+                    Keyboard="{Binding KeyboardType}"
+                    IsPassword="{Binding ShowPassword}"
                     FontSize="17"
                     Focused="EntryField_Focused"
                     Unfocused="EntryField_Unfocused"
                     VerticalOptions="Center"
                     Grid.Column="0"/>
                 <ImageButton
-                    Source="{Binding ShowPassword, Source={x:Reference Root}, Converter={StaticResource PasswordVisibilityIconConverter}}"
+                    Source="{Binding ShowPassword, Converter={StaticResource PasswordVisibilityIconConverter}}"
                     Clicked="ChangePasswordVisibility"
-                    IsVisible="{Binding IsPasswordEntry, Source={x:Reference Root}}"
+                    IsVisible="{Binding IsPasswordEntry}"
                     BackgroundColor="Transparent"
                     HorizontalOptions="End"
                     WidthRequest="30"
@@ -43,7 +47,7 @@
         </Border>
 
         <Grid ColumnDefinitions="Auto, *"
-              IsVisible="{Binding IsValid, Source={x:Reference Root}, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}}" 
+              IsVisible="{Binding IsValid, Converter={StaticResource BoolToVisibilityConverter}}" 
               ColumnSpacing="5"
               Padding="13,0,30,0">
             <Image 
@@ -51,9 +55,10 @@
                 WidthRequest="15" 
                 HeightRequest="15"
                 Grid.Column="0"/>
-            <labels:JustifyLabel 
-                Text="{Binding ErrorMessage, Source={x:Reference Root}}"
+            <Label 
+                Text="{Binding ErrorMessage}"
                 TextColor="{StaticResource InvalidDataColor}"
+                justifiedLabel:Label.JustifyText="True"
                 FontFamily="MontserratSemiBold"
                 FontSize="14"
                 LineBreakMode="WordWrap"

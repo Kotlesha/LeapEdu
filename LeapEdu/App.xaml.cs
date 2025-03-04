@@ -1,4 +1,5 @@
-﻿using LeapEdu.Views;
+﻿using LeapEdu.Extensions;
+using LeapEdu.Views;
 
 namespace LeapEdu;
 
@@ -10,9 +11,12 @@ public partial class App : Application
 
         var loginPage = serviceProvider.GetRequiredService<LoginPage>();
 
-        MainPage = new NavigationPage(loginPage)
-        {
-            BackgroundColor = App.Current.Resources["BackgroundColor"] as Color
-        };
+        MainPage = new NavigationPage(loginPage);
+        UpdateMainPageBackgroundColor();
+
+        App.Current!.RequestedThemeChanged += (o, e) => UpdateMainPageBackgroundColor();
     }
+
+    private void UpdateMainPageBackgroundColor() 
+        => MainPage!.BackgroundColor = App.Current!.Resources.GetAppThemeColor("BackgroundColor");
 }

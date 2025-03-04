@@ -1,3 +1,4 @@
+using LeapEdu.Extensions;
 using LeapEdu.Services.Interfaces;
 using System.Windows.Input;
 
@@ -60,4 +61,10 @@ public partial class BasePage : ContentPage
             await navigationService?.GoBackAsync()!;
         });
 	}
+
+    protected override bool OnBackButtonPressed()
+    {
+        BackCommand.ExecuteIfCan(this);
+        return true;
+    }
 }

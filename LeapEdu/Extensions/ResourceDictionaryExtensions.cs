@@ -15,4 +15,16 @@ public static class ResourceDictionaryExtensions
 
         return default;
     }
+
+    public static object? GetAppThemeIcon(this ResourceDictionary resources, string key)
+    {
+        var isDarkMode = Application.Current!.RequestedTheme == AppTheme.Dark;
+
+        if (resources.TryGetValue(key, out var resource) && resource is AppThemeObject appThemeObject)
+        {
+            return isDarkMode ? appThemeObject.Light : appThemeObject.Dark;
+        }
+
+        return default;
+    }
 }

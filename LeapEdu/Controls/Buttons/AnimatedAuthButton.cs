@@ -2,11 +2,11 @@
 
 namespace LeapEdu.Controls.Buttons;
 
-internal partial class AnimatedAuthImageButton : ImageButton
+internal partial class AnimatedAuthButton : Button
 {
-    public AnimatedAuthImageButton()
+    public AnimatedAuthButton()
     {
-        var touchBehavior = new ImageTouchBehavior
+        var touchBehavior = new TouchBehavior
         {
             DefaultAnimationEasing = Easing.Linear,
             DefaultAnimationDuration = 100,

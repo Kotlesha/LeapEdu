@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using LeapEdu.Controls.Labels;
 using LeapEdu.Controls.Entries;
 using Mopups.Hosting;
 using LeapEdu.ViewModels;
@@ -8,6 +7,7 @@ using LeapEdu.Views;
 using Mopups.Services;
 using LeapEdu.Services.Interfaces;
 using LeapEdu.Services.Implementations;
+using LeapEdu.Controls.Buttons;
 
 namespace LeapEdu;
 

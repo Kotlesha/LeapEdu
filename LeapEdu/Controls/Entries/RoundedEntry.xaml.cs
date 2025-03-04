@@ -1,4 +1,3 @@
-using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Core.Platform;
 using LeapEdu.Extensions;
 
@@ -6,6 +5,8 @@ namespace LeapEdu.Controls.Entries;
 
 public partial class RoundedEntry : ContentView
 {
+    private EventHandler<AppThemeChangedEventArgs>? _themeChangedHandler;
+
     public static readonly BindableProperty ValueProperty = 
         BindableProperty.Create(
             nameof(Value),
@@ -71,14 +72,23 @@ public partial class RoundedEntry : ContentView
             nameof(ShowPassword), 
             typeof(bool), 
             typeof(RoundedEntry), 
-            false);
+            false,
+            propertyChanged: OnShowPasswordChanged);
 
     public static readonly BindableProperty EyeIconProperty =
         BindableProperty.Create(
             nameof(EyeIcon), 
             typeof(string), 
             typeof(RoundedEntry), 
-            "close_eye_icon.svg");
+            App.Current.Resources.GetAppThemeIcon("CloseEyeIcon"));
+
+
+    public static readonly BindableProperty BorderColorProperty =
+        BindableProperty.Create(
+            nameof(BorderColor), 
+            typeof(Color), 
+            typeof(RoundedEntry), 
+            Colors.Gray);
 
     public string Text => EntryField?.Text ?? string.Empty;
 
@@ -142,13 +152,34 @@ public partial class RoundedEntry : ContentView
         private set => SetValue(EyeIconProperty, value);
     }
 
-    public RoundedEntry() => InitializeComponent();
+    public Color BorderColor
+    {
+        get => (Color)GetValue(BorderColorProperty);
+        set => SetValue(BorderColorProperty, value);
+    }
+
+    public RoundedEntry()
+    {
+        InitializeComponent();
+
+        _themeChangedHandler = (o, e) =>
+        {
+            UpdateBorderColor();
+            UpdateEyeIcon();
+        };
+
+        App.Current!.RequestedThemeChanged += _themeChangedHandler;
+    }
 
     private void EntryField_Focused(object sender, FocusEventArgs e) => UpdateBorderColor();
 
     private void EntryField_Unfocused(object sender, FocusEventArgs e) => UpdateBorderColor();
 
-    private void ChangePasswordVisibility(object sender, EventArgs e) => ShowPassword = !ShowPassword;
+    private void ChangePasswordVisibility(object sender, EventArgs e)
+    {
+        ShowPassword = !ShowPassword;
+        UpdateEyeIcon();
+    }
 
     private static void OnIsValidPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
@@ -161,13 +192,19 @@ public partial class RoundedEntry : ContentView
             entry.ShowPassword = showPassword;
     }
 
+    private static void OnShowPasswordChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is RoundedEntry entry)
+            entry.UpdateEyeIcon();
+    }
+
     private void UpdateBorderColor()
     {
         var resources = Application.Current!.Resources;
 
         var validColor = resources.GetAppThemeColor("BackgroundEntryColor");
         var focusedColor = resources.GetAppThemeColor("BorderColorFocused");
-        var invalidColor = (Color)resources["InvalidDataColor"];
+        var invalidColor = resources.GetAppThemeColor("InvalidDataColor");
 
         if (EntryField.IsFocused)
         {
@@ -178,9 +215,26 @@ public partial class RoundedEntry : ContentView
         EntryBorder.Stroke = IsValid ? validColor : invalidColor;
     }
 
+    private void UpdateEyeIcon()
+    {
+        var iconKey = ShowPassword ? "OpenEyeIcon" : "CloseEyeIcon";
+        EyeIcon = (string)App.Current.Resources.GetAppThemeIcon(iconKey);
+    }
+
     public async Task RemoveFocusAsync(CancellationToken cancellationToken = default)
     {
         if (EntryField.IsSoftInputShowing())
             await EntryField.HideKeyboardAsync(cancellationToken);
+    }
+
+    protected override void OnParentSet()
+    {
+        if (Parent is null && _themeChangedHandler is not null)
+        {
+            App.Current!.RequestedThemeChanged -= _themeChangedHandler;
+            _themeChangedHandler = null;
+        }
+
+        base.OnParentSet();
     }
 }

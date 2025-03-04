@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary Source="Resources/LeapEduStyles/LeapEduColors.xaml" />
                 <ResourceDictionary Source="Resources/LeapEduStyles/LeapEduStyles.xaml" />
+                <ResourceDictionary Source="Resources/LeapEduStyles/LeapEduIcons.xaml" />
                 <ResourceDictionary Source="Resources/LeapEduStyles/Markdown/LeapEduMardownStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 

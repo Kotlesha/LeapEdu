@@ -13,14 +13,14 @@
     <Border         
         MaximumHeightRequest="800" 
         WidthRequest="364"
-        StrokeThickness="0">
+        StrokeThickness="0"
+        BackgroundColor="{toolkit:AppThemeResource WindowColor}">
 
         <Border.StrokeShape>
             <RoundRectangle CornerRadius="27" />
         </Border.StrokeShape>
         
         <Grid 
-            BackgroundColor="{StaticResource WindowColor}"
             RowSpacing="20" 
             RowDefinitions="*, Auto" >
 
@@ -30,7 +30,7 @@
                 IsVisible="{Binding IsRunning}"
                 WidthRequest="50"
                 HeightRequest="50"
-                Color="{StaticResource BackgroundActivityIndicatorColor}"
+                Color="{toolkit:AppThemeResource BackgroundActivityIndicatorColor}"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"/>
 
@@ -53,6 +53,7 @@
             <Button 
                 Text="Выйти"
                 FontFamily="MontserratBold"
+                TextColor="{StaticResource DefaultButtonTextColor}"
                 BackgroundColor="{toolkit:AppThemeResource BackgroundButtonColor}"
                 FontSize="16"
                 CornerRadius="0"

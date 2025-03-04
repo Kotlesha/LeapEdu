@@ -8,10 +8,6 @@
              BackgroundColor="{toolkit:AppThemeResource BackgroundColor}"
              NavigationPage.HasNavigationBar="False"
              x:Name="Root">
-    <Page.Behaviors>
-        <mct:StatusBarBehavior StatusBarColor="{toolkit:AppThemeResource BackgroundColor}" StatusBarStyle="DarkContent" />
-    </Page.Behaviors>
-
     <ContentPage.ControlTemplate>
         <ControlTemplate>
             <Grid RowDefinitions="60, *">
@@ -34,7 +30,7 @@
                         </StackLayout.GestureRecognizers>
 
                         <Image 
-                            Source="frog_background_image.png" 
+                            Source="{toolkit:AppThemeResource BackgroundFrogImage}" 
                             MaximumHeightRequest="220" 
                             Aspect="Center"/>
 

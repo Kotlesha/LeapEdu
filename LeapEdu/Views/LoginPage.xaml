@@ -9,7 +9,7 @@
              xmlns:baseviews="clr-namespace:LeapEdu.Views.Base"
              x:DataType="viewmodels:LoginViewModel"
              x:Class="LeapEdu.Views.LoginPage" >
-    <StackLayout Margin="24" VerticalOptions="Center" Spacing="15" x:Name="MainStackLyout">
+    <StackLayout Margin="24" VerticalOptions="Center" Spacing="13" x:Name="MainStackLyout">
         <Label
             Text="Вход в аккаунт"
             FontFamily="MontserratBold"
@@ -17,23 +17,20 @@
             Padding="13,0,0,0"/>
 
         <Grid ColumnSpacing="19" ColumnDefinitions="*,*,*">
-            <buttons:AnimatedAuthImageButton 
-                Source="google_icon.png"
-                Style="{StaticResource AuthImageButtonStyle}"
-                Grid.Column="0">
-            </buttons:AnimatedAuthImageButton>
+            <Button 
+                Style="{StaticResource AuthButtonStyle}"
+                ImageSource="google_icon.png"
+                Grid.Column="0" />
 
-            <buttons:AnimatedAuthImageButton 
-                Source="microsoft_icon.png"
-                Style="{StaticResource AuthImageButtonStyle}"
-                Grid.Column="1">
-            </buttons:AnimatedAuthImageButton>
+            <Button
+                ImageSource="microsoft_icon.png"
+                Style="{StaticResource AuthButtonStyle}"
+                Grid.Column="1" />
 
-            <buttons:AnimatedAuthImageButton 
-                Source="telegram_icon.png"
-                Style="{StaticResource AuthImageButtonStyle}"
-                Grid.Column="2">
-            </buttons:AnimatedAuthImageButton>
+            <Button
+                ImageSource="telegram_icon.png"
+                Style="{StaticResource AuthButtonStyle}"
+                Grid.Column="2" />
         </Grid>
 
         <Grid ColumnSpacing="15" ColumnDefinitions="*,Auto,*">

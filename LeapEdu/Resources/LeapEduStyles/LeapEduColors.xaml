@@ -4,21 +4,24 @@
                     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
     <toolkit:AppThemeColor Light="#9FE2BF" Dark="#2F5C52" x:Key="BackgroundColor"/>
 
-    <Color x:Key="BackgroundActivityIndicatorColor">#FFBA00</Color>
+    <toolkit:AppThemeColor Light="#FFBA00" Dark="#FFFCFC" x:Key="BackgroundActivityIndicatorColor"/>
     <toolkit:AppThemeColor Light="#FFBA00" Dark="#008364" x:Key="BackgroundButtonColor"/>
-    <toolkit:AppThemeColor Light="#FFFCFC" Dark="#FFFCFC" x:Key="DefaultButtonTextColor"/>
-    <Color x:Key="BackgroundImageButtonColor">#FFFCFC</Color>
-    <Color x:Key="CheckedBoxColor">#FFBA00</Color>
-    
-    <Color x:Key="NavigationBarColor">#9FE2BF</Color>
+    <Color x:Key="DefaultButtonTextColor">#FFFCFC</Color>
+    <toolkit:AppThemeColor Light="#FEFEFE" Dark="#95FEFEFE" x:Key="BackgroundAuthButtonColor"/>
+    <toolkit:AppThemeColor Light="#FFBA00" Dark="#008364" x:Key="CheckedBoxColor"/>
 
-    <toolkit:AppThemeColor Light="#FEFEFE" Dark="#FEFEFE" x:Key="BackgroundEntryColor"/>
-    <toolkit:AppThemeColor Light="#878787" Dark="#80FEFEFE" x:Key="PlaceholderColor"/>
+    <toolkit:AppThemeColor Light="#9FE2BF" Dark="#2F5C52" x:Key="NavigationBarColor"/>
+
+    <toolkit:AppThemeColor Light="#FEFEFE" Dark="#50FEFEFE" x:Key="BackgroundEntryColor"/>
+    <toolkit:AppThemeColor Light="Black" Dark="#FFFCFC" x:Key="CursorColor"/>
+    <toolkit:AppThemeColor Light="#9FE2BF" Dark="#FEFEFE" x:Key="PressingAuthButtonColor"/>
+    <toolkit:AppThemeColor Light="#FEFEFE" Dark="#50FEFEFE" x:Key="BorderColor"/>
+    <toolkit:AppThemeColor Light="#878787" Dark="#95FEFEFE" x:Key="PlaceholderColor"/>
     <toolkit:AppThemeColor Light="Black" Dark="#FEFEFE" x:Key="BorderColorFocused"/>
-    <Color x:Key="InvalidDataColor">Red</Color>
+    <toolkit:AppThemeColor Light="Red" Dark="#DB2020" x:Key="InvalidDataColor"/>
     <toolkit:AppThemeColor Light="Black" Dark="#FFFCFC" x:Key="DefaultLabelTextColor"/>
     <toolkit:AppThemeColor Light="Black" Dark="#FFFCFC" x:Key="DefaultBoxViewColor"/>
 
-    <Color x:Key="WindowColor">#FFFCFC</Color>
+    <toolkit:AppThemeColor Light="#FFFCFC" Dark="#2F5C52" x:Key="WindowColor" />
     <Color x:Key="BackgroundWindowColor">#80000000</Color>
 </ResourceDictionary>

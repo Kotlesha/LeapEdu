@@ -67,7 +67,7 @@ public partial class CodeEntryItem : ContentView
     }
 
     private void CodeEntryItem_Focused(object sender, FocusEventArgs e) 
-        => EntryBorder.Stroke = Colors.Black;
+        => EntryBorder.Stroke = Application.Current!.Resources.GetAppThemeColor("BorderColorFocused");
 
     private void CodeEntryItem_Unfocused(object sender, FocusEventArgs e) 
         => EntryBorder.Stroke = Application.Current!.Resources.GetAppThemeColor("BackgroundEntryColor");

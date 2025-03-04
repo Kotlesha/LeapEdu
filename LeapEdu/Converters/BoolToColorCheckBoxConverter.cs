@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using LeapEdu.Extensions;
+using System.Globalization;
 
 namespace LeapEdu.Converters;
 
@@ -8,8 +9,8 @@ public class BoolToColorCheckBoxConverter : IValueConverter
     {
         if (value is bool IsValid)
         {
-            var invalidColor = (Color)App.Current!.Resources["InvalidDataColor"];
-            var normalColor = (Color)App.Current!.Resources["CheckedBoxColor"];
+            var invalidColor = App.Current!.Resources.GetAppThemeColor("InvalidDataColor");
+            var normalColor = App.Current!.Resources.GetAppThemeColor("CheckedBoxColor");
 
             return IsValid ? normalColor : invalidColor;
         }

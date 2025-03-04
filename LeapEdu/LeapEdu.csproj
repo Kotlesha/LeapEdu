@@ -63,7 +63,9 @@
 	  <None Remove="Platforms\Android\Resources\drawable\leap_edu_drawable.xml" />
 	  <None Remove="Platforms\Android\Resources\values\styles.xml" />
 	  <None Remove="Resources\Images\ButtonIcons\back_button_icon.svg" />
-	  <None Remove="Resources\Images\ButtonIcons\Password\question_icon.svg" />
+	  <None Remove="Resources\Images\ButtonIcons\Password\close_eye_icon_dark.svg" />
+	  <None Remove="Resources\Images\ButtonIcons\Password\open_eye_icon_dark.svg" />
+	  <None Remove="Resources\Images\ButtonIcons\Password\question_dark_icon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -79,13 +81,20 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\ButtonIcons\back_button_icon.svg" />
-	  <MauiImage Include="Resources\Images\ButtonIcons\Password\close_eye_icon.svg" />
+	  <MauiImage Include="Resources\Images\ButtonIcons\Password\close_eye_icon\close_eye_icon_light.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Auth\google_icon.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Auth\microsoft_icon.svg" />
-	  <MauiImage Include="Resources\Images\ButtonIcons\Password\open_eye_icon.svg" />
+	  <MauiImage Include="Resources\Images\ButtonIcons\Password\close_eye_icon\close_eye_icon_dark.svg" />
+	  <MauiImage Include="Resources\Images\ButtonIcons\Password\open_eye_icon\open_eye_icon_light.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Auth\telegram_icon.svg" />
-	  <MauiImage Include="Resources\Images\ButtonIcons\Password\question_icon.svg" />
+	  <MauiImage Include="Resources\Images\ButtonIcons\Password\open_eye_icon\open_eye_icon_dark.svg" />
+	  <MauiImage Include="Resources\Images\ButtonIcons\Password\question_icon\question_dark_icon.svg" />
+	  <MauiImage Include="Resources\Images\ButtonIcons\Password\question_icon\question_light_icon.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\retry_icon.svg" />
+	  <MauiImage Include="Resources\Images\error_icon\error_dark_icon.svg" />
+	  <MauiImage Include="Resources\Images\error_icon\error_light_icon.svg" />
+	  <MauiImage Include="Resources\Images\frog_background_image\frog_background_image_dark.svg" />
+	  <MauiImage Include="Resources\Images\frog_background_image\frog_background_image_light.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -114,7 +123,13 @@
 	  <MauiXaml Update="Controls\Popups\LegalNoticesPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\TermsAndConditionsControls\TermsAgreementControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\LeapEduStyles\LeapEduColors.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\LeapEduStyles\LeapEduIcons.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\LeapEduStyles\LeapEduStyles.xaml">

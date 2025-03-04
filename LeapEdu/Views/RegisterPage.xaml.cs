@@ -3,7 +3,6 @@ using LeapEdu.Validation;
 using LeapEdu.ViewModels;
 using LeapEdu.Views.Base;
 using Mopups.Interfaces;
-using Mopups.Services;
 
 namespace LeapEdu.Views;
 
@@ -24,22 +23,9 @@ public partial class RegisterPage : BasePage
             => await NameRoundedEntry.RemoveFocusAsync(CancellationToken.None));
     }
 
-    private void RegisterButton_Pressed(object sender, EventArgs e) => _registerViewModel.Validate();
-
-    private async void TermsOfUse_Tapped(object sender, TappedEventArgs e)
+    private void RegisterButton_Pressed(object sender, EventArgs e)
     {
-        var viewModel = new LegalNoticiesViewModel("terms_of_use.md");
-
-        await _popupNavigation.PushAsync(new LegalNoticesPopup(viewModel), true);
-        await viewModel.LoadDataAsync();
-    }
-
-    private async void PrivacyPolicy_Tapped(object sender, TappedEventArgs e)
-    {
-        var viewModel = new LegalNoticiesViewModel("privacy_policy.md");
-
-        await _popupNavigation.PushAsync(new LegalNoticesPopup(viewModel), true);
-        await viewModel.LoadDataAsync();
+        _registerViewModel.Validate();
     }
 
     private async void PasswordQuestionButton_Pressed(object sender, EventArgs e)

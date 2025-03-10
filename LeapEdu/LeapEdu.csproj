@@ -61,8 +61,10 @@
 
 	<ItemGroup>
 	  <None Remove="Platforms\Android\Resources\drawable\leap_edu_drawable.xml" />
+	  <None Remove="Platforms\Android\Resources\values-night\colors.xml" />
 	  <None Remove="Platforms\Android\Resources\values\styles.xml" />
 	  <None Remove="Resources\Images\ButtonIcons\back_button_icon.svg" />
+	  <None Remove="Resources\Images\ButtonIcons\MainScreen\basket_icon.svg" />
 	  <None Remove="Resources\Images\ButtonIcons\Password\close_eye_icon_dark.svg" />
 	  <None Remove="Resources\Images\ButtonIcons\Password\open_eye_icon_dark.svg" />
 	  <None Remove="Resources\Images\ButtonIcons\Password\question_dark_icon.svg" />
@@ -81,6 +83,9 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\ButtonIcons\back_button_icon.svg" />
+	  <MauiImage Include="Resources\Images\ButtonIcons\MainScreen\basket_icon.svg" />
+	  <MauiImage Include="Resources\Images\ButtonIcons\MainScreen\course_catalog_icon.svg" />
+	  <MauiImage Include="Resources\Images\ButtonIcons\MainScreen\my_courses_icon.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Password\close_eye_icon\close_eye_icon_light.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Auth\google_icon.svg" />
 	  <MauiImage Include="Resources\Images\ButtonIcons\Auth\microsoft_icon.svg" />
@@ -102,7 +107,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\RepairPasswordPage.xaml.cs">
+	  <Compile Update="Controls\TabBars\CustomTabBar.xaml.cs">
+	    <DependentUpon>CustomTabBar.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Controls\TabBars\CustomTabItem.xaml.cs">
+	    <DependentUpon>CustomTabItem.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\AuthPages\RepairPasswordPage.xaml.cs">
 	    <DependentUpon>RepairPasswordPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -123,6 +134,12 @@
 	  <MauiXaml Update="Controls\Popups\LegalNoticesPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\TabBars\CustomTabBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\TabBars\CustomTabItem.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\TermsAndConditionsControls\TermsAgreementControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -141,16 +158,31 @@
 	  <MauiXaml Update="Views\Base\BasePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\LoginPage.xaml">
+	  <MauiXaml Update="Views\AuthPages\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\LoginVerificationPage.xaml">
+	  <MauiXaml Update="Views\AuthPages\LoginVerificationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\RegisterPage.xaml">
+	  <MauiXaml Update="Views\Base\CustomTabbedPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\RepairPasswordPage.xaml">
+	  <MauiXaml Update="Views\CatalogPages\BasketPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CatalogPages\CourseCatalogPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CatalogPages\MainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AuthPages\RegisterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AuthPages\RepairPasswordPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CatalogPages\UserCoursesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

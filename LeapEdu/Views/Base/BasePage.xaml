@@ -31,7 +31,7 @@
 
                         <Image 
                             Source="{toolkit:AppThemeResource BackgroundFrogImage}" 
-                            MaximumHeightRequest="220" 
+                            MaximumHeightRequest="200" 
                             Aspect="Center"/>
 
                         <ContentPresenter />

@@ -59,6 +59,7 @@
 
         <Button
             Text="Подтвердить"
+            Pressed="AcceptButton_Pressed"
             IsEnabled="{Binding IsCodeComplete}"
             Style="{StaticResource DefaultButtonStyle}"/>
     </StackLayout>

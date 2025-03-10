@@ -10,8 +10,9 @@ public partial class App : Application
         InitializeComponent();
 
         var loginPage = serviceProvider.GetRequiredService<LoginPage>();
+        var mainPage = serviceProvider.GetRequiredService<MainPage>();
 
-        MainPage = new NavigationPage(loginPage);
+        MainPage = new NavigationPage(mainPage);
         UpdateMainPageBackgroundColor();
 
         App.Current!.RequestedThemeChanged += (o, e) => UpdateMainPageBackgroundColor();

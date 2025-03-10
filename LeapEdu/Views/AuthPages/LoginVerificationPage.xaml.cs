@@ -19,4 +19,7 @@ public partial class LoginVerificationPage : BasePage
     }
 
     private void RetryButton_Pressed(object sender, EventArgs e) => _loginVerificationViewModel.RestartTimer();
+
+    private async void AcceptButton_Pressed(object sender, EventArgs e) 
+        => await _loginVerificationViewModel.NavigateToAsync<MainPage>();
 }

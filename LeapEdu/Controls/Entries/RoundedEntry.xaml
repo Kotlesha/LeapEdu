@@ -42,6 +42,8 @@
                     BackgroundColor="Transparent"
                     HorizontalOptions="End"
                     WidthRequest="30"
+                    HeightRequest="30"
+                    Aspect="AspectFit"
                     Grid.Column="1">
                 </ImageButton>
             </Grid>

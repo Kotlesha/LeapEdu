@@ -14,8 +14,8 @@ internal class CustomEntryHandler : EntryHandler
 
     protected override void ConnectHandler(AppCompatEditText platformView)
     {
-        platformView.Background = null;
         base.ConnectHandler(platformView);
+        platformView.Background = null;
 
         if (VirtualView.IsPassword)
         {

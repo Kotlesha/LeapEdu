@@ -87,7 +87,7 @@
                     Padding="13,10,0,0"
                     TextDecorations="Underline"
                     HorizontalOptions="Start"
-                    TextColor="{StaticResource DefaultLabelTextColor}">
+                    TextColor="{toolkit:AppThemeResource DefaultLabelTextColor}">
 
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="RepairPassword_Tapped" />

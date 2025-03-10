@@ -7,7 +7,14 @@
         <Setter Property="BackgroundColor" Value="{toolkit:AppThemeResource BackgroundButtonColor}" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource DefaultButtonTextColor}" />
-        <Setter Property="Padding" Value="30,13,30,13" />
+        
+        <Setter Property="Padding">
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="Android" Value="30,13,30,13" />
+                <On Platform="IOS" Value="30,13,30,13" />
+            </OnPlatform>
+        </Setter>
+        
         <Setter Property="CornerRadius" Value="27" />
         <Setter Property="FontFamily" Value="MontserratBold" />
         <Setter Property="FontSize" Value="16" />

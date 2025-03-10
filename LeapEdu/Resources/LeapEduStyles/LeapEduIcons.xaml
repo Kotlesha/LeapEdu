@@ -3,22 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
     <toolkit:AppThemeObject 
-        Light="frog_background_image_light.svg" 
-        Dark="frog_background_image_dark.svg" x:Key="BackgroundFrogImage" />
+        Light="frog_background_image_light.png" 
+        Dark="frog_background_image_dark.png" x:Key="BackgroundFrogImage" />
 
     <toolkit:AppThemeObject
-        Light="open_eye_icon_dark.svg" 
-        Dark="open_eye_icon_light.svg" x:Key="OpenEyeIcon" />
+        Light="open_eye_icon_dark.png" 
+        Dark="open_eye_icon_light.png" x:Key="OpenEyeIcon" />
 
     <toolkit:AppThemeObject
-        Light="close_eye_icon_dark.svg" 
-        Dark="close_eye_icon_light.svg" x:Key="CloseEyeIcon" />
+        Light="close_eye_icon_dark.png" 
+        Dark="close_eye_icon_light.png" x:Key="CloseEyeIcon" />
 
     <toolkit:AppThemeObject 
-        Light="question_light_icon.svg" 
-        Dark="question_dark_icon.svg" x:Key="QuestionIcon" />
+        Light="question_light_icon.png" 
+        Dark="question_dark_icon.png" x:Key="QuestionIcon" />
 
     <toolkit:AppThemeObject 
-        Light="error_light_icon.svg" 
-        Dark="error_dark_icon.svg" x:Key="ErrorIcon" />
+        Light="error_light_icon.png" 
+        Dark="error_dark_icon.png" x:Key="ErrorIcon" />
 </ResourceDictionary>

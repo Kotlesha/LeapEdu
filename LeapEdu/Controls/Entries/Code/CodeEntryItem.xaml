@@ -24,6 +24,7 @@
                 MaxLength="1"
                 WidthRequest="44" 
                 HeightRequest="54"
+                TextColor="{toolkit:AppThemeResource DefaultLabelTextColor}"
                 VerticalTextAlignment="Center"
                 HorizontalTextAlignment="Center"
                 FontFamily="MontserratSemiBold"

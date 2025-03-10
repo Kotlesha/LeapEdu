@@ -14,10 +14,8 @@ public partial class LoginPage : BasePage
         _loginViewModel = loginViewModel;
         BindingContext = loginViewModel;
 
-        RemoveFocusCommand = new Command(async () => {
-            await EmailEntry.RemoveFocusAsync(CancellationToken.None);
-            EmailEntry.Unfocus();
-        });
+        RemoveFocusCommand = new Command(async () =>
+            await EmailEntry.RemoveFocusAsync(CancellationToken.None));
     }
 
     private async void SignIn_Button_Pressed(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using Mopups.Services;
 using LeapEdu.Services.Interfaces;
 using LeapEdu.Services.Implementations;
 using LeapEdu.Controls.Buttons;
+using LeapEdu.Views.CatalogPages;
 
 namespace LeapEdu;
 
@@ -54,6 +55,9 @@ public static class MauiProgram
             handlers.AddHandler(typeof(Entry), typeof(Platforms.Android.Handlers.CustomEntryHandler));
             handlers.AddHandler(typeof(BackspaceEntry), typeof(Platforms.Android.Handlers.BackspaceEntryHandler));
 #endif
+#if IOS
+            handlers.AddHandler(typeof(Entry), typeof(Platforms.iOS.Handlers.CustomEntryHandler));
+#endif
         });
 
         return builder;
@@ -83,6 +87,11 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddTransient<LoginVerificationPage>();
         mauiAppBuilder.Services.AddTransient<RegisterPage>();
         mauiAppBuilder.Services.AddTransient<RepairPasswordPage>();
+
+        mauiAppBuilder.Services.AddSingleton<MainPage>();
+        mauiAppBuilder.Services.AddSingleton<CourseCatalogPage>();
+        mauiAppBuilder.Services.AddSingleton<UserCoursesPage>();
+        mauiAppBuilder.Services.AddSingleton<BasketPage>();
 
         return mauiAppBuilder;
     }

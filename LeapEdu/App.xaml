@@ -16,7 +16,6 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-            <converters:PasswordVisibilityIconConverter x:Key="PasswordVisibilityIconConverter" />
             <converters:BoolToColorCheckBoxConverter x:Key="BoolToColorCheckBoxConverter" />
             <converters:BoolToColorAgreementLabelConverter x:Key="BoolToColorAgreementLabelConverter" />
             <converters:TimeRemainingToStringConverter x:Key="TimeRemainingToStringConverter" />

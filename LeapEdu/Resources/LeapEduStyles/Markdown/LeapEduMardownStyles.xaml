@@ -61,6 +61,7 @@
         <Setter Property="FontSize" Value="15" />
         <Setter Property="TextColor" Value="{StaticResource DefaultLabelTextColor}" />
         <Setter Property="Margin" Value="0,8,6,8" />
+        <Setter Property="CharacterSpacing" Value="-1" />
         <Setter Property="justifiedLabel:Label.JustifyText" Value="True" />
         <Setter Property="LineBreakMode" Value="WordWrap" />
         <Setter Property="VerticalOptions" Value="Center" />

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<baseviews:CustomTabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:tabbars="clr-namespace:LeapEdu.Controls.TabBars"
+             xmlns:baseviews="clr-namespace:LeapEdu.Views.Base"
+             xmlns:pages="clr-namespace:LeapEdu.Views.CatalogPages"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="LeapEdu.Views.MainPage"
+             BackgroundColor="{toolkit:AppThemeResource BackgroundColor}" >
+    <baseviews:CustomTabbedPage.TabBar>
+        <tabbars:CustomTabBar
+            CornerRadius="27"
+            Margin="13"
+            HeightRequest="70"
+            SelectionTabColor="{toolkit:AppThemeResource TabSelectionColor}"
+            SelectionTabHeight="40"
+            SelectionTabWidth="80"
+            SelectionTabCornerRadius="16"
+            TabBarBackgroundColor="{toolkit:AppThemeResource TabBarColor}">
+
+            <tabbars:CustomTabBar.TabItems>
+                <tabbars:CustomTabItem 
+                    ImageSource="course_catalog_icon.png" 
+                    HeightRequest="33"
+                    TargetPageType="{x:Type pages:CourseCatalogPage}" />
+
+                <tabbars:CustomTabItem 
+                    ImageSource="my_courses_icon.png" 
+                    HeightRequest="31"
+                    TargetPageType="{x:Type pages:UserCoursesPage}" />
+
+                <tabbars:CustomTabItem 
+                    ImageSource="basket_icon.png" 
+                    HeightRequest="27" 
+                    TargetPageType="{x:Type pages:BasketPage}" />
+            </tabbars:CustomTabBar.TabItems>
+        </tabbars:CustomTabBar>
+    </baseviews:CustomTabbedPage.TabBar>
+</baseviews:CustomTabbedPage>

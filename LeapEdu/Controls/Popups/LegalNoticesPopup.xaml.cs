@@ -1,7 +1,6 @@
 using LeapEdu.ViewModels;
 using Mopups.Pages;
 using Mopups.Services;
-using Plugin.Maui.MarkdownView;
 
 namespace LeapEdu.Controls.Popups;
 

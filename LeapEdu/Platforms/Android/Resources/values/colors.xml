@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#2B0B98</color>
     <color name="colorAccent">@android:color/black</color>
     <color name="autofill_highlight">#4DFFFFFF</color>
+    <color name="ripple_color">@android:color/transparent</color>
 </resources>

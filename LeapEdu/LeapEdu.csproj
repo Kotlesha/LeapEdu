@@ -57,7 +57,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Platforms\Android\Resources\drawable\leap_edu_drawable.xml" />
+	  <None Remove="Platforms\Android\Resources\drawable\leap_edu_ripple.xml" />
 	  <None Remove="Platforms\Android\Resources\values-night\colors.xml" />
 	  <None Remove="Platforms\Android\Resources\values\styles.xml" />
 	  <None Remove="Resources\Images\ButtonIcons\back_button_icon.svg" />

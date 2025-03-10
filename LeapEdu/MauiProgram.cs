@@ -56,6 +56,7 @@ public static class MauiProgram
 #if ANDROID
             handlers.AddHandler(typeof(Entry), typeof(Platforms.Android.Handlers.CustomEntryHandler));
             handlers.AddHandler(typeof(BackspaceEntry), typeof(Platforms.Android.Handlers.BackspaceEntryHandler));
+            handlers.AddHandler(typeof(AnimatedAuthButton), typeof(Platforms.Android.Handlers.AnimatedAuthButtonHandler));
 #endif
 #if IOS
             handlers.AddHandler(typeof(Entry), typeof(Platforms.iOS.Handlers.CustomEntryHandler));

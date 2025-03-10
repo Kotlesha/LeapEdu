@@ -8,7 +8,9 @@ using Mopups.Services;
 using LeapEdu.Services.Interfaces;
 using LeapEdu.Services.Implementations;
 using LeapEdu.Controls.Buttons;
-using LeapEdu.Views.CatalogPages;
+using LeapEdu.ViewModels.Auth;
+using LeapEdu.Views.Auth;
+using LeapEdu.Views.Catalog;
 
 namespace LeapEdu;
 

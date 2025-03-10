@@ -1,4 +1,4 @@
-using LeapEdu.ViewModels;
+using LeapEdu.ViewModels.Auth;
 using Mopups.Pages;
 
 namespace LeapEdu.Controls.Popups;

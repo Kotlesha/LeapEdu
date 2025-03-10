@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
@@ -31,11 +31,8 @@
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
@@ -68,6 +65,7 @@
 	  <None Remove="Resources\Images\ButtonIcons\Password\close_eye_icon_dark.svg" />
 	  <None Remove="Resources\Images\ButtonIcons\Password\open_eye_icon_dark.svg" />
 	  <None Remove="Resources\Images\ButtonIcons\Password\question_dark_icon.svg" />
+	  <None Remove="Resources\Images\error_icon\error_dark_icon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -113,12 +111,15 @@
 	  <Compile Update="Controls\TabBars\CustomTabItem.xaml.cs">
 	    <DependentUpon>CustomTabItem.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\AuthPages\RepairPasswordPage.xaml.cs">
+	  <Compile Update="Views\Auth\RepairPasswordPage.xaml.cs">
 	    <DependentUpon>RepairPasswordPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\Cards\MainCourseCard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\Entries\Code\CodeEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -158,31 +159,31 @@
 	  <MauiXaml Update="Views\Base\BasePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AuthPages\LoginPage.xaml">
+	  <MauiXaml Update="Views\Auth\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AuthPages\LoginVerificationPage.xaml">
+	  <MauiXaml Update="Views\Auth\LoginVerificationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Base\CustomTabbedPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CatalogPages\BasketPage.xaml">
+	  <MauiXaml Update="Views\Catalog\BasketPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CatalogPages\CourseCatalogPage.xaml">
+	  <MauiXaml Update="Views\Catalog\CourseCatalogPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CatalogPages\MainPage.xaml">
+	  <MauiXaml Update="Views\Catalog\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AuthPages\RegisterPage.xaml">
+	  <MauiXaml Update="Views\Auth\RegisterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\AuthPages\RepairPasswordPage.xaml">
+	  <MauiXaml Update="Views\Auth\RepairPasswordPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CatalogPages\UserCoursesPage.xaml">
+	  <MauiXaml Update="Views\Catalog\UserCoursesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

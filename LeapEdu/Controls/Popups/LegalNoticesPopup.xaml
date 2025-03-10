@@ -6,7 +6,7 @@
              xmlns:mdv="clr-namespace:Plugin.Maui.MarkdownView;assembly=Plugin.Maui.MarkdownView"
              xmlns:mdvs="clr-namespace:Plugin.Maui.MarkdownView.ViewSuppliers;assembly=Plugin.Maui.MarkdownView"
              xmlns:styles="clr-namespace:LeapEdu.Resources.LeapEduStyles.Markdown"
-             xmlns:viewmodels="clr-namespace:LeapEdu.ViewModels"
+             xmlns:viewmodels="clr-namespace:LeapEdu.ViewModels.Auth"
              x:DataType="viewmodels:LegalNoticiesViewModel"
              x:Class="LeapEdu.Controls.Popups.LegalNoticesPopup"
              BackgroundColor="{StaticResource BackgroundWindowColor}">

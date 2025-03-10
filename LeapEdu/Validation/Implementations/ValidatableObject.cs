@@ -3,47 +3,27 @@ using LeapEdu.Validation.Interfaces;
 
 namespace LeapEdu.Validation.Implementations;
 
-public class ValidatableObject<T> : ObservableObject, IValidity<T>
+public partial class ValidatableObject<T> : ObservableObject, IValidity<T>
 {
-    private IEnumerable<string> _errors = [];
-    private bool _isValid = true;
-    private T _value;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(FirstError))]
+    private IEnumerable<string> errors = [];
+
+    [ObservableProperty]
+    private bool isValid = true;
+
+    [ObservableProperty]
+    private T value;
+
+    partial void OnValueChanged(T value) => ClearState();
 
     public List<IValidationRule<T>> Validations { get; } = [];
 
-    public IEnumerable<string> Errors
-    {
-        get => _errors;
-        set
-        {
-            if (SetProperty(ref _errors, value))
-                OnPropertyChanged(nameof(FirstError));
-        }
-    }
-
     public string? FirstError => Errors?.FirstOrDefault();
-
-    public bool IsValid
-    {
-        get => _isValid;
-        set => SetProperty(ref _isValid, value);
-    }
-
-    public T Value
-    {
-        get => _value;
-        set {
-            if (SetProperty(ref _value, value))
-            {
-                ClearState();
-                OnPropertyChanged(nameof(IsValid));
-            }
-        }
-    }
 
     public void ClearState()
     {
-        _isValid = true;
+        IsValid = true;
         Errors = [];
     }
 

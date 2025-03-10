@@ -16,11 +16,10 @@
 
     <toolkit:AppThemeColor Light="#FEFEFE" Dark="#50FEFEFE" x:Key="BackgroundEntryColor"/>
     <toolkit:AppThemeColor Light="Black" Dark="#FFFCFC" x:Key="CursorColor"/>
-    <toolkit:AppThemeColor Light="#9FE2BF" Dark="#FEFEFE" x:Key="PressingAuthButtonColor"/>
     <toolkit:AppThemeColor Light="#FEFEFE" Dark="#50FEFEFE" x:Key="BorderColor"/>
     <toolkit:AppThemeColor Light="#878787" Dark="#95FEFEFE" x:Key="PlaceholderColor"/>
     <toolkit:AppThemeColor Light="Black" Dark="#FEFEFE" x:Key="BorderColorFocused"/>
-    <toolkit:AppThemeColor Light="Red" Dark="#DB2020" x:Key="InvalidDataColor"/>
+    <toolkit:AppThemeColor Light="Red" Dark="#EF4D4D" x:Key="InvalidDataColor"/>
     <toolkit:AppThemeColor Light="Black" Dark="#FFFCFC" x:Key="DefaultLabelTextColor"/>
     <toolkit:AppThemeColor Light="Black" Dark="#FFFCFC" x:Key="DefaultBoxViewColor"/>
 
